@@ -1,0 +1,10 @@
+- name: 'Deploy site'
+  hosts: webserver
+  gather_facts: false
+
+  tasks:
+    - name: 'checkout commit'
+      git:
+        repo: 'git@github.com:turbokuzmich/stopvirus.git'
+        dest: '/var/www/stopvirus-next.moscow'
+        version: 'master'
