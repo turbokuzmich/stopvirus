@@ -8,7 +8,7 @@ export default function Home() {
       <Head>
         <title>Заголовок</title>
       </Head>
-      <video className={styles['video-bg']} autoPlay loop muted playsInline>
+      <video className={styles['video-bg']} poster="/background.jpg" autoPlay loop muted playsInline>
         <source src="/background.mp4" type="video/mp4" />
       </video>
     </>
