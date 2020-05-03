@@ -16,7 +16,7 @@ class YoutubeBackground extends React.Component {
     };
 
     this.defaultPlayerVars = {
-      autoplay: 1,
+      autoplay: 0,
       controls: 0,
       rel: 0,
       showinfo: 0,
@@ -26,7 +26,7 @@ class YoutubeBackground extends React.Component {
       playsinline: 1,
     };
 
-    this.setContainerRef = this.setContainerRef.bind(this);
+    this.containerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -38,14 +38,15 @@ class YoutubeBackground extends React.Component {
     window.removeEventListener('resize', this.updateDimensions.bind(this));
   }
 
-  setContainerRef(container) {
-    this.container = container;
-  }
-
   updateDimensions() {
+    if (!this.containerRef.current) {
+      return;
+    }
+
+    const container = this.containerRef.current;
     const { aspectRatio } = this.state;
-    const containerWidth = this.container.clientWidth;
-    const containerHeight = this.container.clientHeight;
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
     const containerAspectRatio = containerWidth / containerHeight;
 
     let videoHeight = containerHeight;
@@ -103,7 +104,7 @@ class YoutubeBackground extends React.Component {
     };
 
     return (
-      <div style={style} ref={this.setContainerRef} className={classnames(styles.container, className)}>
+      <div style={style} ref={this.containerRef} className={classnames(styles.container, className)}>
         <div>{children}</div>
         <div
           className={styles.videoContainer}
@@ -137,6 +138,9 @@ YoutubeBackground.propTypes = {
   onReady: PropTypes.func,
   onEnd: PropTypes.func,
   playerOptions: PropTypes.object,
+  nocookie: PropTypes.bool,
+  style: PropTypes.string,
+  children: PropTypes.any,
 };
 
 YoutubeBackground.defaultProps = {

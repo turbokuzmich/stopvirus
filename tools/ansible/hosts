@@ -1,2 +1,2 @@
 [webserver]
-192.168.0.137
+192.168.0.137 site_path=/var/www/stopvirus-next.moscow
