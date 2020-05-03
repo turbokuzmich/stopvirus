@@ -3,16 +3,20 @@
   gather_facts: false
 
   tasks:
-    - name: 'checkout master'
+    - name: 'checkout'
       git:
         repo: 'git@github.com:turbokuzmich/stopvirus.git'
         dest: '{{ site_path }}'
         version: 'master'
-    - name: 'install dependencies'
+    - name: 'dependencies'
       shell:
         cmd: 'npm ci'
         chdir: '{{ site_path }}'
-    - name: 'build site'
+    - name: 'build'
       shell:
         cmd: 'npm run build'
+        chdir: '{{ site_path }}'
+    - name: 'restart'
+      shell:
+        cmd: 'pm2 restart site'
         chdir: '{{ site_path }}'
