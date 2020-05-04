@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import PageVisibility from 'react-page-visibility';
 import PropTypes from 'prop-types';
+import styles from './index.module.css';
+import classnames from 'classnames';
 
 /**
  * @param {Object} props
@@ -25,7 +27,15 @@ export default function BackgroundVideo({ className, src, type, poster }) {
 
   return (
     <PageVisibility onChange={onVisibilityChanged}>
-      <video className={className} poster={poster} autoPlay loop muted playsInline ref={videoRef}>
+      <video
+        className={classnames(styles['video-bg'], className)}
+        poster={poster}
+        autoPlay
+        loop
+        muted
+        playsInline
+        ref={videoRef}
+      >
         <source src={src} type={type} />
       </video>
     </PageVisibility>
