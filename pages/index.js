@@ -31,7 +31,7 @@ export default function Home() {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
-      <BackgroundVideo src="/main.mp4" type="video/webm" poster="/background.jpg" />
+      <BackgroundVideo src="/main.mp4" type="video/mp4" poster="/background.jpg" />
       <Carousel
         className={(classes.carousel, 'transparent')}
         showThumbs={false}
