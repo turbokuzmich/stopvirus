@@ -10,12 +10,13 @@
   },
   "author": "kurteev.d@yandex.ru",
   "dependencies": {
+    "@material-ui/core": "^4.9.12",
     "classnames": "^2.2.6",
-    "materialize-css": "^1.0.0-rc.2",
-    "next": "9.3.5",
+    "next": "9.3.6",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-page-visibility": "^6.1.0",
     "sass": "^1.26.3"
   },
   "devDependencies": {
