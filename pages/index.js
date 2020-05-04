@@ -1,11 +1,28 @@
 import React from 'react';
 import Head from 'next/head';
 import BackgroundVideo from '../components/BackgroundVideo';
-import { Container } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { Carousel } from 'react-responsive-carousel';
-import styles from './index.module.css';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  carousel: {
+    height: '100vh',
+    width: '100vw',
+  },
+  carouselItem: {
+    height: '100vh',
+    background: 'transparent',
+    color: '#fff',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
 
 export default function Home() {
+  const classes = useStyles();
+
   return (
     <>
       <Head>
@@ -16,7 +33,7 @@ export default function Home() {
       </Head>
       <BackgroundVideo src="/background.webm" type="video/webm" poster="/background.jpg" />
       <Carousel
-        className={(styles.carousel, 'transparent')}
+        className={(classes.carousel, 'transparent')}
         showThumbs={false}
         autoPlay={false}
         infiniteLoop={false}
@@ -26,8 +43,10 @@ export default function Home() {
         useKeyboardArrows
         swipeable
       >
-        <Container className={styles['carousel-item']}>Obanze</Container>
-        <Container className={styles['carousel-item']}>Fuck you</Container>
+        <Container className={classes.carouselItem}>
+          <Typography variant="h1">Миша, как дела?</Typography>
+        </Container>
+        <Container className={classes.carouselItem}>Fuck you</Container>
       </Carousel>
     </>
   );

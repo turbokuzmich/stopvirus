@@ -1,8 +1,35 @@
 import React, { useRef } from 'react';
 import PageVisibility from 'react-page-visibility';
 import PropTypes from 'prop-types';
-import styles from './index.module.css';
 import classnames from 'classnames';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  container: {
+    width: '100vw',
+    height: '100vh',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: -1,
+  },
+  video: {
+    objectFit: 'cover',
+    pointerEvents: 'none',
+    width: '100%',
+    height: '100%',
+  },
+  fade: {
+    content: '""',
+    display: 'block',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, .7)',
+  },
+}));
 
 /**
  * @param {Object} props
@@ -13,6 +40,7 @@ import classnames from 'classnames';
  */
 export default function BackgroundVideo({ className, src, type, poster }) {
   const videoRef = useRef(null);
+  const classes = useStyles();
 
   const onVisibilityChanged = (isVisible) => {
     if (!videoRef.current) {
@@ -27,17 +55,20 @@ export default function BackgroundVideo({ className, src, type, poster }) {
 
   return (
     <PageVisibility onChange={onVisibilityChanged}>
-      <video
-        className={classnames(styles['video-bg'], className)}
-        poster={poster}
-        autoPlay
-        loop
-        muted
-        playsInline
-        ref={videoRef}
-      >
-        <source src={src} type={type} />
-      </video>
+      <div className={classes.container}>
+        <video
+          className={classnames(classes.video, className)}
+          poster={poster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          ref={videoRef}
+        >
+          <source src={src} type={type} />
+        </video>
+        <div className={classes.fade} />
+      </div>
     </PageVisibility>
   );
 }
