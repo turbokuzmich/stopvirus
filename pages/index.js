@@ -1,53 +1,78 @@
 import React from 'react';
-import Head from 'next/head';
 import BackgroundVideo from '../components/BackgroundVideo';
-import { Container, Typography } from '@material-ui/core';
-import { Carousel } from 'react-responsive-carousel';
-import { makeStyles } from '@material-ui/core/styles';
+import Layout from '../components/Layout';
+import Logo from '../components/Logo/Wide';
+import { FullPage, Slide } from '../components/FullPage';
+import { Container, Box, Typography, Button } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
-  carousel: {
-    height: '100vh',
-    width: '100vw',
-  },
-  carouselItem: {
-    height: '100vh',
+const useStyles = makeStyles((theme) => ({
+  hero: {
+    height: '100%',
     background: 'transparent',
     color: '#fff',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  heroText: {
+    margin: theme.spacing(1, 0, 3),
+    fontWeight: 500,
+  },
 }));
+
+const HeroButton = withStyles((theme) => ({
+  root: {
+    padding: '16px 51px',
+    margin: theme.spacing(1),
+  },
+}))(Button);
 
 export default function Home() {
   const classes = useStyles();
 
   return (
-    <>
-      <Head>
-        <title>Заголовок</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-      </Head>
-      <BackgroundVideo src="/main.mp4" type="video/mp4" poster="/background.jpg" />
-      <Carousel
-        className={(classes.carousel, 'transparent')}
-        showThumbs={false}
-        autoPlay={false}
-        infiniteLoop={false}
-        showArrows={false}
-        showStatus={false}
-        showIndicators={false}
-        useKeyboardArrows
-        swipeable
-      >
-        <Container className={classes.carouselItem}>
-          <Typography variant="h1">Миша, как дела?</Typography>
-        </Container>
-        <Container className={classes.carouselItem}>Fuck you</Container>
-      </Carousel>
-    </>
+    <Layout title="NEW///BREEZE — системы очистки воздуха">
+      <>
+        <BackgroundVideo src="/background.mp4" type="video/mp4" poster="/background.jpg" />
+        <FullPage>
+          <Slide>
+            <Container className={classes.hero}>
+              <Box textAlign="center">
+                <Logo />
+                <Typography
+                  variant="h3"
+                  classes={{
+                    root: classes.heroText,
+                  }}
+                >
+                  СИСТЕМЫ ОЧИСТКИ ВОЗДУХА
+                </Typography>
+                <HeroButton variant="contained" size="large">
+                  Подробнее
+                </HeroButton>
+                <HeroButton color="primary" variant="contained" size="large">
+                  Заказать
+                </HeroButton>
+              </Box>
+            </Container>
+          </Slide>
+          <Slide>Крутой товар</Slide>
+        </FullPage>
+        {/* <Carousel */}
+        {/*   className={(classes.carousel, 'transparent')} */}
+        {/*   showThumbs={false} */}
+        {/*   autoPlay={false} */}
+        {/*   infiniteLoop={false} */}
+        {/*   showArrows={false} */}
+        {/*   showStatus={false} */}
+        {/*   showIndicators={false} */}
+        {/*   useKeyboardArrows */}
+        {/*   swipeable */}
+        {/* > */}
+        {/*   <Container className={classes.carouselItem}>Fuck you</Container> */}
+        {/* </Carousel> */}
+      </>
+    </Layout>
   );
 }
