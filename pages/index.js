@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <Layout title="NEW///BREEZE — системы очистки воздуха">
       <>
-        <BackgroundVideo src="/output.mp4" type="video/mp4" poster="/background.jpg" />
+        <BackgroundVideo src="/background.mp4" type="video/mp4" poster="/background.jpg" />
         <FullPage>
           <Slide>
             <Container className={classes.hero}>
