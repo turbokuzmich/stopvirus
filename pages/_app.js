@@ -13,6 +13,20 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
   },
+  typography: {
+    h1: {
+      fontFamily: '"Montserrat", "Helvetica", sans-serif',
+    },
+    h2: {
+      fontFamily: '"Montserrat", "Helvetica", sans-serif',
+    },
+    h3: {
+      fontFamily: '"Montserrat", "Helvetica", sans-serif',
+    },
+    h4: {
+      fontFamily: '"Montserrat", "Helvetica", sans-serif',
+    },
+  },
 });
 
 export default function App(props) {

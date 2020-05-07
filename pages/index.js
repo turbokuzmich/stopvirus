@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   heroText: {
-    margin: theme.spacing(1, 0, 3),
-    fontWeight: 500,
+    margin: theme.spacing(1, 0, 5),
+    fontWeight: 600,
+    textTransform: 'uppercase',
   },
 }));
 
@@ -40,13 +41,14 @@ export default function Home() {
             <Container className={classes.hero}>
               <Box textAlign="center">
                 <Logo />
+                <Typography variant="h4">компактные интерьерные</Typography>
                 <Typography
                   variant="h3"
                   classes={{
                     root: classes.heroText,
                   }}
                 >
-                  СИСТЕМЫ ОЧИСТКИ ВОЗДУХА
+                  системы очистки воздуха
                 </Typography>
                 <HeroButton variant="contained" size="large">
                   Подробнее
