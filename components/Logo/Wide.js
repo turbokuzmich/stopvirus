@@ -2,10 +2,13 @@ import React from 'react';
 import { SvgIcon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   wideLogo: {
-    width: 270,
-    height: 51,
+    width: 190,
+    height: 60,
+    position: 'relative',
+    top: 4,
+    marginLeft: theme.spacing(1),
   },
 }));
 

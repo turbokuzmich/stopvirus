@@ -11,6 +11,7 @@
   "author": "kurteev.d@yandex.ru",
   "dependencies": {
     "@material-ui/core": "^4.9.12",
+    "@material-ui/icons": "^4.9.1",
     "classnames": "^2.2.6",
     "next": "9.3.6",
     "prop-types": "^15.7.2",

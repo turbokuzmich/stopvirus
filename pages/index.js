@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Layout from '../components/Layout';
 import Logo from '../components/Logo/Wide';
+import MenuIcon from '@material-ui/icons/Menu';
+import Link from 'next/link';
 import { FullPage, Slide } from '../components/FullPage';
-import { Container, Box, Typography, Button } from '@material-ui/core';
+import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+/**
+ * @typedef {Object} SlideChange
+ * @property {number} from
+ * @property {number} to
+ */
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -17,8 +25,35 @@ const useStyles = makeStyles((theme) => ({
   },
   heroText: {
     margin: theme.spacing(1, 0, 5),
-    fontWeight: 600,
     textTransform: 'uppercase',
+    fontWeight: 500,
+  },
+  appBar: ({ slide }) => {
+    const base = {
+      transition: [
+        'box-shadow 700ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        'background-color 700ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      ].join(','),
+    };
+    return Object.assign(
+      {},
+      base,
+      slide === 0
+        ? {
+            boxShadow: '0px 2px 4px -1px rgba(0,0,0,0)',
+            backgroundColor: 'rgba(255,255,255,0)',
+          }
+        : {
+            boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)',
+            backgroundColor: '#f0f0f0',
+          }
+    );
+  },
+  menuIcon: ({ slide }) => ({
+    fill: slide === 0 ? '#fff' : theme.palette.grey['600'],
+  }),
+  catalogSlide: {
+    backgroundColor: '#f8f8f8',
   },
 }));
 
@@ -30,17 +65,36 @@ const HeroButton = withStyles((theme) => ({
 }))(Button);
 
 export default function Home() {
-  const classes = useStyles();
+  const [slide, setSlide] = useState(0);
+  const classes = useStyles({ slide });
+
+  /**
+   * @param {SlideChange} change
+   */
+  const onSlideChange = (change) => {
+    setSlide(change.to);
+  };
 
   return (
     <Layout title="NEW///BREEZE — системы очистки воздуха">
       <>
         <BackgroundVideo src="/background.mp4" type="video/mp4" poster="/background.jpg" />
-        <FullPage>
+        <AppBar classes={{ root: classes.appBar }}>
+          <Toolbar>
+            <IconButton disableFocusRipple>
+              <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
+            </IconButton>
+            <Link href="/" passHref>
+              <A>
+                <Logo />
+              </A>
+            </Link>
+          </Toolbar>
+        </AppBar>
+        <FullPage beforeChange={onSlideChange}>
           <Slide>
             <Container className={classes.hero}>
               <Box textAlign="center">
-                <Logo />
                 <Typography variant="h4">компактные интерьерные</Typography>
                 <Typography
                   variant="h3"
@@ -59,7 +113,7 @@ export default function Home() {
               </Box>
             </Container>
           </Slide>
-          <Slide>Крутой товар</Slide>
+          <Slide className={classes.catalogSlide}></Slide>
         </FullPage>
         {/* <Carousel */}
         {/*   className={(classes.carousel, 'transparent')} */}
