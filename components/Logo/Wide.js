@@ -1,22 +1,43 @@
 import React from 'react';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import { SvgIcon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  wideLogo: {
-    width: 190,
-    height: 60,
-    position: 'relative',
-    top: 4,
-    marginLeft: theme.spacing(1),
+/**
+ * @typedef {Object} LogoProps
+ * @property {number} [width]
+ * @property {string} [className]
+ */
+
+const originalSize = {
+  width: 682,
+  height: 128,
+};
+
+const useStyles = makeStyles(() => ({
+  /**
+   * @param {LogoProps} props
+   */
+  wideLogo: (props) => {
+    return {
+      width: props.width,
+      height: Math.ceil((props.width * originalSize.height) / originalSize.width),
+    };
   },
 }));
 
-export default function WideLogo() {
-  const classes = useStyles();
+/**
+ * @param {LogoProps} props
+ */
+export default function WideLogo(props) {
+  const classes = useStyles(props);
 
   return (
-    <SvgIcon viewBox="0 0 682 128" className={classes.wideLogo}>
+    <SvgIcon
+      viewBox={`0 0 ${originalSize.width} ${originalSize.height}`}
+      className={classnames(classes.wideLogo, props.className)}
+    >
       <defs>
         <path
           d="M150.65 58.67c-6.45-2.12-12.8-4.04-19.44-5.68C129.29 21.9 104.07.63 73.56.63c-28.87.87-52.17 23.68-54 52.36-6.35 1.54-12.42 3.37-18.67 5.49-1.07.38 111.55.19 149.76.19z"
@@ -73,3 +94,12 @@ export default function WideLogo() {
     </SvgIcon>
   );
 }
+
+WideLogo.propTypes = {
+  width: PropTypes.number,
+  className: PropTypes.string,
+};
+
+WideLogo.defaultProps = {
+  width: originalSize.width,
+};

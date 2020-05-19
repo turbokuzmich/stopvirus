@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Layout from '../components/Layout';
 import Logo from '../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
-import Link from 'next/link';
 import { FullPage, Slide } from '../components/FullPage';
 import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const PageSlide = {
+  Hero: 0,
+  Details: 1,
+};
 
 /**
  * @typedef {Object} SlideChange
@@ -28,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'uppercase',
     fontWeight: 500,
   },
+  heroLogo: {
+    marginBottom: theme.spacing(4),
+  },
   appBar: ({ slide }) => {
     const base = {
       transition: [
@@ -38,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     return Object.assign(
       {},
       base,
-      slide === 0
+      slide === PageSlide.Hero
         ? {
             boxShadow: '0px 2px 4px -1px rgba(0,0,0,0)',
             backgroundColor: 'rgba(255,255,255,0)',
@@ -49,10 +56,21 @@ const useStyles = makeStyles((theme) => ({
           }
     );
   },
+  appBarLogo: ({ slide }) => {
+    const base = {
+      position: 'relative',
+      top: 4,
+      marginLeft: theme.spacing(1),
+      transition: 'opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+    };
+
+    return Object.assign({}, base, slide === PageSlide.Hero ? { opacity: 0 } : { opacity: 1 });
+  },
+  appBarLogoLink: ({ slide }) => (slide === PageSlide.Hero ? { pointerEvents: 'none' } : { pointerEvents: 'auto' }),
   menuIcon: ({ slide }) => ({
-    fill: slide === 0 ? '#fff' : theme.palette.grey['600'],
+    fill: slide === PageSlide.Hero ? '#fff' : theme.palette.grey['600'],
   }),
-  catalogSlide: {
+  detailsSlide: {
     backgroundColor: '#f8f8f8',
   },
 }));
@@ -66,13 +84,28 @@ const HeroButton = withStyles((theme) => ({
 
 export default function Home() {
   const [slide, setSlide] = useState(0);
+  const fullPageRef = useRef(null);
   const classes = useStyles({ slide });
 
   /**
    * @param {SlideChange} change
    */
-  const onSlideChange = (change) => {
+  const onSlideChanged = (change) => {
     setSlide(change.to);
+  };
+
+  const onDetailsClicked = () => {
+    if (fullPageRef && fullPageRef.current) {
+      fullPageRef.current.scrollToSlide(PageSlide.Details);
+    }
+  };
+
+  const onLogoClicked = (event) => {
+    event.preventDefault();
+
+    if (fullPageRef && fullPageRef.current) {
+      fullPageRef.current.scrollToSlide(PageSlide.Hero);
+    }
   };
 
   return (
@@ -84,17 +117,17 @@ export default function Home() {
             <IconButton disableFocusRipple>
               <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
             </IconButton>
-            <Link href="/" passHref>
-              <A>
-                <Logo />
-              </A>
-            </Link>
+            {/* FIXME scrolls FullPage to top on click */}
+            <A classes={{ root: classes.appBarLogoLink }} href="/" onClick={onLogoClicked}>
+              <Logo width={190} className={classes.appBarLogo} />
+            </A>
           </Toolbar>
         </AppBar>
-        <FullPage beforeChange={onSlideChange}>
+        <FullPage beforeChange={onSlideChanged} ref={fullPageRef}>
           <Slide>
             <Container className={classes.hero}>
               <Box textAlign="center">
+                <Logo className={classes.heroLogo} />
                 <Typography variant="h4">компактные интерьерные</Typography>
                 <Typography
                   variant="h3"
@@ -104,7 +137,7 @@ export default function Home() {
                 >
                   системы очистки воздуха
                 </Typography>
-                <HeroButton variant="contained" size="large">
+                <HeroButton variant="contained" size="large" onClick={onDetailsClicked}>
                   Подробнее
                 </HeroButton>
                 <HeroButton color="primary" variant="contained" size="large">
@@ -113,7 +146,7 @@ export default function Home() {
               </Box>
             </Container>
           </Slide>
-          <Slide className={classes.catalogSlide}></Slide>
+          <Slide className={classes.detailsSlide}></Slide>
         </FullPage>
         {/* <Carousel */}
         {/*   className={(classes.carousel, 'transparent')} */}
