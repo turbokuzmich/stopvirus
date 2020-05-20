@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 /**
  * @typedef {Object} LogoProps
- * @property {number} [width]
  * @property {string} [className]
  */
 
@@ -15,16 +14,18 @@ const originalSize = {
   height: 128,
 };
 
+/**
+ * @param {number} width
+ * @param {string} [unit=px]
+ */
+export function logoSize(width, unit = 'px') {
+  const height = (width * originalSize.height) / originalSize.width;
+
+  return { width: `${width}${unit}`, height: `${height}${unit}` };
+}
+
 const useStyles = makeStyles(() => ({
-  /**
-   * @param {LogoProps} props
-   */
-  wideLogo: (props) => {
-    return {
-      width: props.width,
-      height: Math.ceil((props.width * originalSize.height) / originalSize.width),
-    };
-  },
+  wideLogo: originalSize,
 }));
 
 /**
@@ -96,10 +97,5 @@ export default function WideLogo(props) {
 }
 
 WideLogo.propTypes = {
-  width: PropTypes.number,
   className: PropTypes.string,
-};
-
-WideLogo.defaultProps = {
-  width: originalSize.width,
 };

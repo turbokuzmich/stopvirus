@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Layout from '../components/Layout';
-import Logo from '../components/Logo/Wide';
+import Logo, { logoSize } from '../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
 import { FullPage, Slide } from '../components/FullPage';
 import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import mediaQuery from '../utils/mediaQuery';
 
 const PageSlide = {
   Hero: 0,
@@ -28,12 +29,30 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   heroText: {
+    [theme.breakpoints.down('md')]: {
+      fontSize: '2.7vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '5vw',
+    },
+  },
+  heroLargeText: {
     margin: theme.spacing(1, 0, 5),
     textTransform: 'uppercase',
     fontWeight: 500,
+    [theme.breakpoints.down('md')]: {
+      fontSize: '3.7vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '5vw',
+    },
   },
   heroLogo: {
     marginBottom: theme.spacing(4),
+    [theme.breakpoints.down('md')]: logoSize(50, 'vw'),
+    [theme.breakpoints.down('sm')]: logoSize(70, 'vw'),
+    [theme.breakpoints.down('xs')]: { display: 'none' },
+    [mediaQuery({ maxHeight: 600 })]: { display: 'none' },
   },
   appBar: ({ slide }) => {
     const base = {
@@ -63,8 +82,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(1),
       transition: 'opacity 700ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
     };
+    const size = logoSize(190);
+    const visibility = slide === PageSlide.Hero ? { opacity: 0 } : { opacity: 1 };
+    const media = { [mediaQuery([{ maxHeight: 600 }, { maxWidth: 599 }])]: { opacity: 1 } };
 
-    return Object.assign({}, base, slide === PageSlide.Hero ? { opacity: 0 } : { opacity: 1 });
+    return Object.assign({}, base, size, visibility, media);
   },
   appBarLogoLink: ({ slide }) => (slide === PageSlide.Hero ? { pointerEvents: 'none' } : { pointerEvents: 'auto' }),
   menuIcon: ({ slide }) => ({
@@ -79,6 +101,21 @@ const HeroButton = withStyles((theme) => ({
   root: {
     padding: '16px 51px',
     margin: theme.spacing(1),
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.2vw',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '2vw',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '3vw',
+    },
+    [mediaQuery({ maxWidth: 450 })]: {
+      padding: '16px 30px',
+    },
+    [mediaQuery({ maxWidth: 400 })]: {
+      fontSize: '3.5vw',
+    },
   },
 }))(Button);
 
@@ -119,7 +156,7 @@ export default function Home() {
             </IconButton>
             {/* FIXME scrolls FullPage to top on click */}
             <A classes={{ root: classes.appBarLogoLink }} href="/" onClick={onLogoClicked}>
-              <Logo width={190} className={classes.appBarLogo} />
+              <Logo className={classes.appBarLogo} />
             </A>
           </Toolbar>
         </AppBar>
@@ -128,11 +165,13 @@ export default function Home() {
             <Container className={classes.hero}>
               <Box textAlign="center">
                 <Logo className={classes.heroLogo} />
-                <Typography variant="h4">компактные интерьерные</Typography>
+                <Typography variant="h4" classes={{ root: classes.heroText }}>
+                  компактные интерьерные
+                </Typography>
                 <Typography
                   variant="h3"
                   classes={{
-                    root: classes.heroText,
+                    root: classes.heroLargeText,
                   }}
                 >
                   системы очистки воздуха
