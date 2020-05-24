@@ -3,6 +3,7 @@ import BackgroundVideo from '../components/BackgroundVideo';
 import Layout from '../components/Layout';
 import Logo, { logoSize } from '../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
+import Link from 'next/link';
 import { FullPage, Slide } from '../components/FullPage';
 import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A, Grid } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -149,26 +150,31 @@ const HeroButton = withStyles((theme) => ({
 const slides = [
   {
     title: 'Для дома',
+    link: '/home',
     text:
       'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
     title: 'Для салонов красоты',
+    link: '/beauty-salon',
     text:
       'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
     title: 'Для маникюра',
+    link: '/manicure',
     text:
       'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
     title: 'Для барбер шопов',
+    link: '/barbershop',
     text:
       'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
   {
     title: 'Для ресторанов',
+    link: '/restaurant',
     text:
       'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
   },
@@ -256,7 +262,7 @@ export default function Home() {
               }}
               swipeable
             >
-              {slides.map(({ title, text }, index) => {
+              {slides.map(({ title, link, text }, index) => {
                 return (
                   <Container key={index} className={classes.carouselItem}>
                     <Grid container spacing={0} classes={{ root: classes.gridRoot }}>
@@ -269,9 +275,11 @@ export default function Home() {
                             {title}
                           </Typography>
                           <Typography classes={{ root: classes.gridParagraph }}>{text}</Typography>
-                          <Button color="primary" variant="contained" size="large">
-                            Подробнее
-                          </Button>
+                          <Link href={link}>
+                            <Button color="primary" variant="contained" size="large">
+                              Подробнее
+                            </Button>
+                          </Link>
                         </Box>
                       </Grid>
                     </Grid>
@@ -314,7 +322,7 @@ const SliderArrow = withStyles({
     backgroundColor: 'rgba(0, 0, 0, .1)',
     cursor: 'default',
   },
-})(function ({ classes, onClick, hasPrev, hasNext, prev, next }) {
+})(function Arrow({ classes, onClick, hasPrev, hasNext, prev, next }) {
   const symbol = prev ? '⮃' : '⮁';
   const disabled = (prev && !hasPrev) || (next && !hasNext);
 
