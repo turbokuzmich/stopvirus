@@ -19,7 +19,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-page-visibility": "^6.1.0",
-    "react-responsive-carousel": "^3.2.5"
+    "react-responsive-carousel": "^3.2.7"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

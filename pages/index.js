@@ -4,9 +4,11 @@ import Layout from '../components/Layout';
 import Logo, { logoSize } from '../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
 import { FullPage, Slide } from '../components/FullPage';
-import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
+import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A, Grid } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Carousel } from 'react-responsive-carousel';
 import mediaQuery from '../utils/mediaQuery';
+import classnames from 'classnames';
 
 const PageSlide = {
   Hero: 0,
@@ -95,6 +97,31 @@ const useStyles = makeStyles((theme) => ({
   detailsSlide: {
     backgroundColor: '#f8f8f8',
   },
+  carousel: {
+    height: 'calc(100vh - 64px)',
+    paddingTop: 64,
+    '& .control-dots .dot': {
+      background: 'rgba(0, 0, 0, .2)',
+      boxShadow: 'none',
+    },
+  },
+  carouselItem: {
+    height: 'calc(100vh - 64px)',
+  },
+  gridRoot: {
+    height: '100%',
+  },
+  gridItem: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  gridItemPicture: {},
+  gridItemText: {
+    paddingLeft: theme.spacing(12),
+  },
+  gridParagraph: {
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const HeroButton = withStyles((theme) => ({
@@ -118,6 +145,34 @@ const HeroButton = withStyles((theme) => ({
     },
   },
 }))(Button);
+
+const slides = [
+  {
+    title: 'Для дома',
+    text:
+      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Для салонов красоты',
+    text:
+      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Для маникюра',
+    text:
+      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Для барбер шопов',
+    text:
+      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+  {
+    title: 'Для ресторанов',
+    text:
+      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  },
+];
 
 export default function Home() {
   const [slide, setSlide] = useState(0);
@@ -185,22 +240,87 @@ export default function Home() {
               </Box>
             </Container>
           </Slide>
-          <Slide className={classes.detailsSlide}></Slide>
+          <Slide className={classes.detailsSlide}>
+            <Carousel
+              className={classes.carousel}
+              showThumbs={false}
+              autoPlay={false}
+              infiniteLoop={false}
+              showStatus={false}
+              useKeyboardArrows
+              renderArrowPrev={(onClick, hasPrev, label) => {
+                return <SliderArrow onClick={onClick} label={label} hasPrev={hasPrev} prev />;
+              }}
+              renderArrowNext={(onClick, hasNext, label) => {
+                return <SliderArrow onClick={onClick} label={label} hasNext={hasNext} next />;
+              }}
+              swipeable
+            >
+              {slides.map(({ title, text }, index) => {
+                return (
+                  <Container key={index} className={classes.carouselItem}>
+                    <Grid container spacing={0} classes={{ root: classes.gridRoot }}>
+                      <Grid item classes={{ item: classnames(classes.gridItem, classes.gridItemPicture) }}>
+                        <img src="https://via.placeholder.com/500x350" alt="Для дома" />
+                      </Grid>
+                      <Grid item xs classes={{ item: classnames(classes.gridItem, classes.gridItemText) }}>
+                        <Box textAlign="left">
+                          <Typography variant="h4" gutterBottom>
+                            {title}
+                          </Typography>
+                          <Typography classes={{ root: classes.gridParagraph }}>{text}</Typography>
+                          <Button color="primary" variant="contained" size="large">
+                            Подробнее
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Container>
+                );
+              })}
+            </Carousel>
+          </Slide>
         </FullPage>
-        {/* <Carousel */}
-        {/*   className={(classes.carousel, 'transparent')} */}
-        {/*   showThumbs={false} */}
-        {/*   autoPlay={false} */}
-        {/*   infiniteLoop={false} */}
-        {/*   showArrows={false} */}
-        {/*   showStatus={false} */}
-        {/*   showIndicators={false} */}
-        {/*   useKeyboardArrows */}
-        {/*   swipeable */}
-        {/* > */}
-        {/*   <Container className={classes.carouselItem}>Fuck you</Container> */}
-        {/* </Carousel> */}
       </>
     </Layout>
   );
 }
+
+const SliderArrow = withStyles({
+  main: {
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    transform: 'translateY(-50%)',
+    height: 180,
+    width: 40,
+    lineHeight: '180px',
+    textAlign: 'center',
+    cursor: 'pointer',
+    zIndex: 1,
+    backgroundColor: 'rgba(0, 0, 0, .2)',
+    transition: 'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+    color: '#ffffff',
+    fontSize: '2rem',
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, .1)',
+    },
+  },
+  next: {
+    left: 'initial',
+    right: 0,
+  },
+  disabled: {
+    backgroundColor: 'rgba(0, 0, 0, .1)',
+    cursor: 'default',
+  },
+})(function ({ classes, onClick, hasPrev, hasNext, prev, next }) {
+  const symbol = prev ? '⮃' : '⮁';
+  const disabled = (prev && !hasPrev) || (next && !hasNext);
+
+  return (
+    <div onClick={onClick} className={classnames(classes.main, { [classes.next]: next, [classes.disabled]: disabled })}>
+      {symbol}
+    </div>
+  );
+});
