@@ -18,5 +18,4 @@
         chdir: '{{ site_path }}'
     - name: 'restart'
       shell:
-        cmd: 'pm2 restart site'
-        chdir: '{{ site_path }}'
+        cmd: 'pm2 restart {{ pm2_config }}'

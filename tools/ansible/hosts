@@ -1,2 +1,2 @@
 [webserver]
-178.215.76.151 site_path=/var/www/stopvirus-next.moscow
+178.215.76.151 site_path=/var/www/stopvirus-next.moscow pm2_config=/home/turbokuzmich/ecosystem.config.js
