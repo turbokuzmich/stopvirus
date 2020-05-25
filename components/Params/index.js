@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Param({ title, value, gutterBottom, classes }) {
+export default function Param({ title, value, gutterBottom = false, classes = {} }) {
   const intClasses = useStyles(gutterBottom);
 
   return (
@@ -58,7 +58,7 @@ export default function Param({ title, value, gutterBottom, classes }) {
 Param.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  gutterBottom: PropTypes.boolean,
+  gutterBottom: PropTypes.bool,
   classes: PropTypes.shape({
     root: PropTypes.string,
     title: PropTypes.string,
