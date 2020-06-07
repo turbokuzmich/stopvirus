@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import { Typography, Container, Box, Grid } from '@material-ui/core';
+import { Typography, Container, Box, Button, Grid } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
@@ -48,6 +48,13 @@ const Section = withStyles((theme) => ({
   }),
 }))((props) => <Container {...omit(props, ['gutterTop', 'gutterBottom'])} />);
 
+const BuyButton = withStyles((theme) => ({
+  root: {
+    padding: '16px 51px',
+    margin: theme.spacing(2, 0, 0),
+  },
+}))(Button);
+
 export default function Home() {
   const classes = useStyles();
 
@@ -69,6 +76,9 @@ export default function Home() {
                     labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
                     cras pulvinar. Urna molestie at elementum eu facilisis.
                   </T>
+                  <BuyButton color="primary" variant="contained" size="large">
+                    Заказать
+                  </BuyButton>
                 </Grid>
               </Grid>
             </Container>
