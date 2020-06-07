@@ -5,6 +5,7 @@ import { Typography, Container, Box, Button, Grid } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
+import red from '@material-ui/core/colors/red';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     background: 'linear-gradient(21deg, rgba(59,59,59,1) 0%, rgba(204,204,204,1) 100%)',
     color: '#fff',
     padding: theme.spacing(8, 0),
+  },
+  reference: {
+    color: red['A700'],
   },
 }));
 
@@ -68,7 +72,7 @@ export default function Home() {
               <Grid container>
                 <Grid item xs={6}>
                   <T variant="h1" gutterBottom>
-                    Для дома
+                    Для салонов красоты
                   </T>
                   <T variant="body1" paragraph>
                     Нужно более развернуто написать, чем же этот продукт так хорош для дома. А справа какую-нибудь
@@ -97,18 +101,29 @@ export default function Home() {
                   с&nbsp;возможностью подбора индивидуального цветового решения относительно вашего интерьера.
                 </T>
                 <Param title="Уровень шума, дБ" value="35–41" />
-                <Param title="Высота, мм" value="602–612" />
+                <Param
+                  title="Высота, мм"
+                  value={
+                    <span>
+                      602–1082<sup className={classes.reference}>*</sup>
+                    </span>
+                  }
+                />
                 <Param title="Ширина, мм" value="407" />
                 <Param title="Глубина, мм" value="418" />
                 <Param title="Толщина стенок, мм" value="16–18" gutterBottom />
+                <T paragraph variant="body2">
+                  <sup className={classes.reference}>*</sup>&nbsp;&mdash; модификация сверхвысокой мощности
+                  &laquo;ЦИКЛОН-F250&raquo;
+                </T>
                 <T variant="h4" paragraph>
                   Двигатель
                 </T>
                 <Param title="Рабочий механизм" value="осевой" />
-                <Param title="Мощность, Вт" value="200" />
-                <Param title="Воздухообмен, м³/час" value="1210" />
+                <Param title="Мощность, Вт" value={<span>150&ndash;200</span>} />
+                <Param title="Воздухообмен, м³/час" value={<span>870&ndash;1210</span>} />
                 <Param title="Влагозащита" value="есть" />
-                <Param title="Вес, кг" value="6.2" gutterBottom />
+                <Param title="Вес вне конструкции, кг" value={<span>4.5&ndash;6.2</span>} gutterBottom />
               </Grid>
             </Grid>
           </Section>
@@ -150,8 +165,8 @@ export default function Home() {
                   Фильтрующий материал тонкой очистки используется в&nbsp;фильтрах очистки воздуха, вторая ступень
                   фильтрации&nbsp;&mdash; в&nbsp;системе вентиляции.
                 </T>
-                <T paragraph>
-                  <b>Технология Meltblown TEDA</b>
+                <T variant="h4" gutterBottom>
+                  Технология Meltblown TEDA
                 </T>
                 <T paragraph>
                   <b>Средняя эффективность очистки по кварцевой пыли, %</b>
@@ -202,51 +217,6 @@ export default function Home() {
               </Grid>
               <Grid item xs={6}>
                 <img src="https://via.placeholder.com/500x350" alt="Для дома" />
-              </Grid>
-            </Grid>
-          </Section>
-          <Section>
-            <Grid container>
-              <Grid item xs={6}>
-                <img src="https://via.placeholder.com/500x350" alt="Для дома" />
-              </Grid>
-              <Grid item xs={6}>
-                <T variant="h4" gutterBottom>
-                  Класс фильтра: HEPA<sup>®</sup> Н13, H14
-                </T>
-                <T paragraph>
-                  <b>ТУ 28.25.14-001-96280271-2017</b>
-                </T>
-                <T paragraph>Класс очистки&nbsp;&mdash; H13-H14.</T>
-                <T paragraph>
-                  HEPA&nbsp;&mdash; фильтр абсолютной очистки, позволяет добиться стерильной атмосферы в&nbsp;помещении.
-                  HEPA фильтры используются в&nbsp;медицинских учреждениях, хирургии, лабораториях, на&nbsp;предприятиях
-                  пищевой промышленности, на&nbsp;производствах, где требуется стерильная обстановка.
-                </T>
-                <T paragraph>
-                  Область применения&nbsp;&mdash; фильтр конечной ступени очистки в&nbsp;многоступенчатых системах
-                  очистки.
-                </T>
-                <T paragraph>
-                  Конструкция&nbsp;&mdash; алюминиевый корпус с&nbsp;гофрированной фильтрующей бумагой
-                  и&nbsp;сепараторами из&nbsp;клея.
-                </T>
-                <T paragraph>
-                  Фильтрующий материал&nbsp;&mdash; гофрированная фильтровальная бумага на&nbsp;основе ультра-
-                  и&nbsp;микро-тонкого стекловолокна или полимерные бумаги.
-                </T>
-                <T paragraph>Условия эксплуатации:</T>
-                <Param title="Температура, °С" value={<span>-40 &ndash; + 70</span>} />
-                <Param title="Относительная влажность, %" value="до 100" />
-                <Param title="Исходная запыленность, мг/м³" value="до 3" gutterBottom />
-                <Param title="Начальное сопротивление, Па" value="от 150" gutterBottom />
-                <T paragraph>Особенности:</T>
-                <T paragraph component="ul">
-                  <T component="li">абсолютная очистка воздуха;</T>
-                  <T component="li">низкое начальное сопротивление;</T>
-                  <T component="li">высокие показатели пылеемкости;</T>
-                  <T component="li">пожаробезопасный материал.</T>
-                </T>
               </Grid>
             </Grid>
           </Section>
