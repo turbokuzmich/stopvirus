@@ -56,8 +56,8 @@ export default function Param({ title, value, gutterBottom = false, classes = {}
 }
 
 Param.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.func]).isRequired,
   gutterBottom: PropTypes.bool,
   classes: PropTypes.shape({
     root: PropTypes.string,

@@ -9,6 +9,7 @@ import omit from 'lodash/omit';
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: 64,
+    fontSize: '1.2rem',
   },
   hero: {
     background: 'linear-gradient(21deg, rgba(59,59,59,1) 0%, rgba(204,204,204,1) 100%)',
@@ -179,7 +180,7 @@ export default function Home() {
           </Section>
           <Section>
             <Grid container>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <T variant="h4" gutterBottom>
                   Фильтры тонкой очистки воздуха F8
                 </T>
@@ -188,9 +189,63 @@ export default function Home() {
                   конечной ступени очистки (доочистки). Используются в&nbsp;больничных палатах, при производстве
                   продуктов питания и&nbsp;лекарств.
                 </T>
+                <T paragraph>Условия эксплуатации:</T>
+                <Param title="Температура очищаемого воздуха, °C" value="-40 до +80" />
+                <Param title="Относительная влажность воздуха, %" value="до 100" />
+                <Param title={<span>Номинальная производительность, м&sup3;/час</span>} value="1000" />
+                <Param title="Срок эксплуатации, час" value="до 4000" />
+                <Param title="Средняя эффективность очистки кварцевой пыли, %" value="95" />
+                <Param title="Размер частиц в проскоке, мкм" value="0.4" />
+                <Param title="Начальный перепад давления, Па" value="от -150" />
+                <Param title="Рекомендуемый конечный перепаад давления, Па" value="-450" />
               </Grid>
-              <Grid xs={6}>
+              <Grid item xs={6}>
                 <img src="https://via.placeholder.com/500x350" alt="Для дома" />
+              </Grid>
+            </Grid>
+          </Section>
+          <Section>
+            <Grid container>
+              <Grid item xs={6}>
+                <img src="https://via.placeholder.com/500x350" alt="Для дома" />
+              </Grid>
+              <Grid item xs={6}>
+                <T variant="h4" gutterBottom>
+                  Класс фильтра: HEPA<sup>®</sup> Н13, H14
+                </T>
+                <T paragraph>
+                  <b>ТУ 28.25.14-001-96280271-2017</b>
+                </T>
+                <T paragraph>Класс очистки&nbsp;&mdash; H13-H14.</T>
+                <T paragraph>
+                  HEPA&nbsp;&mdash; фильтр абсолютной очистки, позволяет добиться стерильной атмосферы в&nbsp;помещении.
+                  HEPA фильтры используются в&nbsp;медицинских учреждениях, хирургии, лабораториях, на&nbsp;предприятиях
+                  пищевой промышленности, на&nbsp;производствах, где требуется стерильная обстановка.
+                </T>
+                <T paragraph>
+                  Область применения&nbsp;&mdash; фильтр конечной ступени очистки в&nbsp;многоступенчатых системах
+                  очистки.
+                </T>
+                <T paragraph>
+                  Конструкция&nbsp;&mdash; алюминиевый корпус с&nbsp;гофрированной фильтрующей бумагой
+                  и&nbsp;сепараторами из&nbsp;клея.
+                </T>
+                <T paragraph>
+                  Фильтрующий материал&nbsp;&mdash; гофрированная фильтровальная бумага на&nbsp;основе ультра-
+                  и&nbsp;микро-тонкого стекловолокна или полимерные бумаги.
+                </T>
+                <T paragraph>Условия эксплуатации:</T>
+                <Param title="Температура, °С" value={<span>-40 &ndash; + 70</span>} />
+                <Param title="Относительная влажность, %" value="до 100" />
+                <Param title="Исходная запыленность, мг/м³" value="до 3" gutterBottom />
+                <Param title="Начальное сопротивление, Па" value="от 150" gutterBottom />
+                <T paragraph>Особенности:</T>
+                <T paragraph component="ul">
+                  <T component="li">абсолютная очистка воздуха;</T>
+                  <T component="li">низкое начальное сопротивление;</T>
+                  <T component="li">высокие показатели пылеемкости;</T>
+                  <T component="li">пожаробезопасный материал.</T>
+                </T>
               </Grid>
             </Grid>
           </Section>
