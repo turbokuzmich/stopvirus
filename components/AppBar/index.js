@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo, { logoSize } from '../../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
 import Link from 'next/link';
+import Menu from '../Menu';
 import { AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -24,18 +25,23 @@ const useStyles = makeStyles((theme) => ({
 export default function Bar() {
   const classes = useStyles();
 
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
   return (
-    <AppBar classes={{ root: classes.appBar }}>
-      <Toolbar>
-        <IconButton disableFocusRipple>
-          <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
-        </IconButton>
-        <Link href="/" passHref>
-          <A>
-            <Logo className={classes.appBarLogo} />
-          </A>
-        </Link>
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar classes={{ root: classes.appBar }}>
+        <Toolbar>
+          <IconButton onClick={() => setMenuOpen(true)} disableFocusRipple>
+            <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
+          </IconButton>
+          <Link href="/" passHref>
+            <A>
+              <Logo className={classes.appBarLogo} />
+            </A>
+          </Link>
+        </Toolbar>
+      </AppBar>
+      <Menu open={isMenuOpen} onClose={() => setMenuOpen(false)} />
+    </>
   );
 }

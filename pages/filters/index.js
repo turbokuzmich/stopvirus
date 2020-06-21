@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import Menu from '../../components/Menu';
 import { Typography, Container, Box, Grid, Button } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -111,7 +110,6 @@ export default function Filters() {
     <Layout title="NEW///BREEZE — для дома">
       <>
         <AppBar />
-        <Menu />
         <Box classes={{ root: classes.container }}>
           <Box classes={{ root: classes.hero }}>
             <Container>

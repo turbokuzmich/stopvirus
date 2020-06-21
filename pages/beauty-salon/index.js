@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import Menu from '../../components/Menu'
 import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import Link from 'next/link';
@@ -68,7 +67,6 @@ export default function Home() {
     <Layout title="NEW///BREEZE — для салонов красоты">
       <>
         <AppBar />
-        <Menu />
         <Box classes={{ root: classes.container }}>
           <Box classes={{ root: classes.hero }}>
             <Container>
@@ -130,6 +128,9 @@ export default function Home() {
                 <Param title="Воздухообмен, м³/час" value={<span>870&ndash;1210</span>} />
                 <Param title="Влагозащита" value="есть" />
                 <Param title="Вес вне конструкции, кг" value={<span>4.5&ndash;6.2</span>} gutterBottom />
+                <T variant="h4" paragraph>
+                  Фильтры
+                </T>
                 <T paragraph component="ul">
                   <T component="li">
                     <Link href="/filters#filtek" passHref>
