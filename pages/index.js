@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Logo, { logoSize } from '../components/Logo/Wide';
 import MenuIcon from '@material-ui/icons/Menu';
 import Link from 'next/link';
+import Menu from '../components/Menu';
 import { FullPage, Slide } from '../components/FullPage';
 import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A, Grid } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -182,6 +183,7 @@ const slides = [
 
 export default function Home() {
   const [slide, setSlide] = useState(0);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const fullPageRef = useRef(null);
   const classes = useStyles({ slide });
 
@@ -212,7 +214,7 @@ export default function Home() {
         <BackgroundVideo src="/background.mp4" type="video/mp4" poster="/background.jpg" />
         <AppBar classes={{ root: classes.appBar }}>
           <Toolbar>
-            <IconButton disableFocusRipple>
+            <IconButton onClick={() => setMenuOpen(true)} disableFocusRipple>
               <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
             </IconButton>
             {/* FIXME scrolls FullPage to top on click */}
@@ -221,6 +223,7 @@ export default function Home() {
             </A>
           </Toolbar>
         </AppBar>
+        <Menu open={isMenuOpen} onClose={() => setMenuOpen(false)} />
         <FullPage beforeChange={onSlideChanged} ref={fullPageRef}>
           <Slide>
             <Container className={classes.hero}>

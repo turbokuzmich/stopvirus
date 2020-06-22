@@ -107,7 +107,7 @@ export default function Filters() {
   }, []);
 
   return (
-    <Layout title="NEW///BREEZE — для дома">
+    <Layout title="NEW///BREEZE — фильтры">
       <>
         <AppBar />
         <Box classes={{ root: classes.container }}>
