@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
 import Menu from '../../components/Menu';
+import Viewer from '../../components/3dViewer';
 import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import Link from 'next/link';
@@ -17,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     background: 'linear-gradient(21deg, rgba(59,59,59,1) 0%, rgba(204,204,204,1) 100%)',
     color: '#fff',
     padding: theme.spacing(8, 0),
+  },
+  viewerContainer: {
+    paddingRight: theme.spacing(2),
   },
 }));
 
@@ -89,7 +93,14 @@ export default function Home() {
           <Section>
             <Grid container>
               <Grid item xs={6}>
-                <img src="https://via.placeholder.com/500x350" alt="Для дома" />
+                <div className={classes.viewerContainer}>
+                  <Viewer
+                    folder="https://cdn.scaleflex.it/demo/chair-360-72/"
+                    filename="chair_{index}.jpg?v1"
+                    amount={72}
+                    magnifier={3}
+                  />
+                </div>
               </Grid>
               <Grid item xs={6}>
                 <T variant="h3" gutterBottom>
