@@ -83,9 +83,11 @@ export default function Home() {
                     labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
                     cras pulvinar. Urna molestie at elementum eu facilisis.
                   </T>
-                  <BuyButton color="primary" variant="contained" size="large">
-                    Заказать
-                  </BuyButton>
+                  <Link href="/order">
+                    <BuyButton color="primary" variant="contained" size="large">
+                      Заказать
+                    </BuyButton>
+                  </Link>
                 </Grid>
               </Grid>
             </Container>
@@ -99,6 +101,7 @@ export default function Home() {
                     filename="chair_{index}.jpg?v1"
                     amount={72}
                     magnifier={3}
+                    autoplay
                   />
                 </div>
               </Grid>

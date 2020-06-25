@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import Menu from '../../components/Menu'
+import Menu from '../../components/Menu';
 import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import Link from 'next/link';
@@ -79,9 +79,11 @@ export default function Home() {
                     labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
                     cras pulvinar. Urna molestie at elementum eu facilisis.
                   </T>
-                  <BuyButton color="primary" variant="contained" size="large">
-                    Заказать
-                  </BuyButton>
+                  <Link href="/order">
+                    <BuyButton color="primary" variant="contained" size="large">
+                      Заказать
+                    </BuyButton>
+                  </Link>
                 </Grid>
               </Grid>
             </Container>

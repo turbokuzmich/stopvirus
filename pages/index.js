@@ -217,7 +217,6 @@ export default function Home() {
             <IconButton onClick={() => setMenuOpen(true)} disableFocusRipple>
               <MenuIcon classes={{ root: classes.menuIcon }} fontSize="large" />
             </IconButton>
-            {/* FIXME scrolls FullPage to top on click */}
             <A classes={{ root: classes.appBarLogoLink }} href="/" onClick={onLogoClicked}>
               <Logo className={classes.appBarLogo} />
             </A>
@@ -243,9 +242,11 @@ export default function Home() {
                 <HeroButton variant="contained" size="large" onClick={onDetailsClicked}>
                   Подробнее
                 </HeroButton>
-                <HeroButton color="primary" variant="contained" size="large">
-                  Заказать
-                </HeroButton>
+                <Link href="/order">
+                  <HeroButton color="primary" variant="contained" size="large">
+                    Заказать
+                  </HeroButton>
+                </Link>
               </Box>
             </Container>
           </Slide>
