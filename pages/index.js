@@ -122,6 +122,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(12),
   },
   gridParagraph: {
+    fontSize: '1.2rem',
     marginBottom: theme.spacing(2),
   },
 }));
@@ -153,31 +154,31 @@ const slides = [
     title: 'Для дома',
     link: '/home',
     text:
-      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Интерьерные системы очистки водуха NEW//BREEZE - это компактные, встроенные в корпус небольших тумб технологичные устройства, обеспечивающие очистку воздуха в помещении до уровня  требуемого в медицине, фармакологии и хирургии. Сверхвысокая производительность обеспечивает  быструю и качественную очистку воздушной смеси (воздуха), а фильтры класса HEPA гарантируют  безопасность и результат.  Широкий выбор внешней отделки устройств подойдёт тем, кто заботится о внешнем виде своего жилья и уделяет дизайну помещения не последнюю роль.',
   },
   {
     title: 'Для салонов красоты',
     link: '/beauty-salon',
     text:
-      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для маникюра',
     link: '/manicure',
     text:
-      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для барбер шопов',
     link: '/barbershop',
     text:
-      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для ресторанов',
     link: '/restaurant',
     text:
-      'Сюда нужен краткий текст, описывающий отличительные особенности. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Безопасность ваших клиентов является приоритетом, поэтому мы оснастили системы NEW//BREEZE  долговечными фильтрами самого высокого класса по очень приятной и доступной стоимости. Широкий спектр применения в ресторанном бизнесе и в кальянных. Индивидуальный проект и возможность встраивания в различные поверхности',
   },
 ];
 
@@ -270,12 +271,9 @@ export default function Home() {
                 return (
                   <Container key={index} className={classes.carouselItem}>
                     <Grid container spacing={0} classes={{ root: classes.gridRoot }}>
-                      <Grid item classes={{ item: classnames(classes.gridItem, classes.gridItemPicture) }}>
-                        <img src="https://via.placeholder.com/500x350" alt="Для дома" />
-                      </Grid>
-                      <Grid item xs classes={{ item: classnames(classes.gridItem, classes.gridItemText) }}>
+                      <Grid item xs={8} classes={{ item: classnames(classes.gridItem, classes.gridItemText) }}>
                         <Box textAlign="left">
-                          <Typography variant="h4" gutterBottom>
+                          <Typography variant="h3" gutterBottom>
                             {title}
                           </Typography>
                           <Typography classes={{ root: classes.gridParagraph }}>{text}</Typography>

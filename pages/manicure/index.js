@@ -79,12 +79,7 @@ export default function Home() {
                   <T variant="h1" gutterBottom>
                     Для маникюра и педикюра
                   </T>
-                  <T variant="body1" paragraph>
-                    Нужно более развернуто написать, чем же этот продукт так хорош для дома. А справа какую-нибудь
-                    фотку. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
-                    cras pulvinar. Urna molestie at elementum eu facilisis.
-                  </T>
+                  <T variant="body1" paragraph>Защита клиента и&nbsp;мастера, а&nbsp;также очистка воздуха во&nbsp;всём помещении салона красоты всего одним устройством. Собирает пыль от&nbsp;гель-лаков и&nbsp;ногтевой напил, волосяную пыль. Готовые решения и&nbsp;индивидуальный проект с&nbsp;соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и&nbsp;производительно. Ваши клиенты в&nbsp;безопасности, а&nbsp;значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о&nbsp;сотрудниках и&nbsp;клиентах, повышение КПД, увеличение прибыли.</T>
                   <Link href="/order">
                     <BuyButton color="primary" variant="contained" size="large">
                       Заказать

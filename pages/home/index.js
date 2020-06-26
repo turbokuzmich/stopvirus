@@ -76,10 +76,13 @@ export default function Home() {
                     Для дома
                   </T>
                   <T variant="body1" paragraph>
-                    Нужно более развернуто написать, чем же этот продукт так хорош для дома. А справа какую-нибудь
-                    фотку. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
-                    cras pulvinar. Urna molestie at elementum eu facilisis.
+                    Интерьерные системы очистки водуха NEW//BREEZE&nbsp;&mdash; это компактные, встроенные в&nbsp;корпус
+                    небольших тумб технологичные устройства, обеспечивающие очистку воздуха в&nbsp;помещении
+                    до&nbsp;уровня требуемого в&nbsp;медицине, фармакологии и&nbsp;хирургии. Сверхвысокая
+                    производительность обеспечивает быструю и&nbsp;качественную очистку воздушной смеси (воздуха),
+                    а&nbsp;фильтры класса HEPA гарантируют безопасность и&nbsp;результат. Широкий выбор внешней отделки
+                    устройств подойдёт тем, кто заботится о&nbsp;внешнем виде своего жилья и&nbsp;уделяет дизайну
+                    помещения не&nbsp;последнюю роль.
                   </T>
                   <Link href="/order">
                     <BuyButton color="primary" variant="contained" size="large">

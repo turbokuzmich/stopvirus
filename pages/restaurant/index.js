@@ -76,10 +76,10 @@ export default function Home() {
                     Для ресторанов
                   </T>
                   <T variant="body1" paragraph>
-                    Нужно более развернуто написать, чем же этот продукт так хорош для дома. А справа какую-нибудь
-                    фотку. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
-                    cras pulvinar. Urna molestie at elementum eu facilisis.
+                    Безопасность ваших клиентов является приоритетом, поэтому мы&nbsp;оснастили системы NEW//BREEZE
+                    долговечными фильтрами самого высокого класса по&nbsp;очень приятной и&nbsp;доступной стоимости.
+                    Широкий спектр применения в&nbsp;ресторанном бизнесе и&nbsp;в&nbsp;кальянных. Индивидуальный проект
+                    и&nbsp;возможность встраивания в&nbsp;различные поверхности
                   </T>
                   <Link href="/order">
                     <BuyButton color="primary" variant="contained" size="large">
