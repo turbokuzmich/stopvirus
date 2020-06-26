@@ -119,10 +119,11 @@ export default function Filters() {
                     Фильтры
                   </T>
                   <T variant="body1" paragraph>
-                    Нужно более развернуто написать, чем же этот продукт так хорош для дома. А справа какую-нибудь
-                    фотку. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Sagittis vitae et leo duis ut. Arcu cursus euismod quis viverra nibh
-                    cras pulvinar. Urna molestie at elementum eu facilisis.
+                    Система фильтрации воздуха основана на&nbsp;использовании высоких технологий производства
+                    современных, обеспечивающих максимальную сорбцию и&nbsp;адгезию материалах, способных очищать воздух
+                    от&nbsp;посторонних примесей, а&nbsp;также грибков и&nbsp;вирусов и&nbsp;построена
+                    на&nbsp;использовании целого ряда фильтров: F4, F5, F8, HEPA H13-14, что гарантирует полную очистку
+                    циркулирующего воздуха.
                   </T>
                 </Grid>
               </Grid>

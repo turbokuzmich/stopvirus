@@ -54,10 +54,10 @@ const routes = [
     route: '/order',
     title: 'заказать',
   },
-  {
+  /*{
     route: '/contacts',
     title: 'контакты',
-  },
+  },*/
 ].map(transformRoute);
 
 const useStyles = makeStyles((theme) => ({
