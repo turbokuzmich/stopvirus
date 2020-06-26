@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import Menu from '../../components/Menu';
+import Viewer from '../../components/3dViewer';
 import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import Link from 'next/link';
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
   },
   reference: {
     color: red['A700'],
+  },
+  viewerContainer: {
+    paddingRight: theme.spacing(2),
   },
 }));
 
@@ -68,7 +71,6 @@ export default function Home() {
     <Layout title="NEW///BREEZE — для маникюра и педикюра">
       <>
         <AppBar />
-        <Menu />
         <Box classes={{ root: classes.container }}>
           <Box classes={{ root: classes.hero }}>
             <Container>
@@ -95,7 +97,17 @@ export default function Home() {
           <Section>
             <Grid container>
               <Grid item xs={6}>
-                <img src="https://via.placeholder.com/500x350" alt="Для дома" />
+                <div className={classes.viewerContainer}>
+                  <Viewer
+                    folder="/rotate/1/"
+                    filename="{index}.jpg"
+                    amount={143}
+                    magnifier={3}
+                    speed={300}
+                    autoplay
+                    reverse
+                  />
+                </div>
               </Grid>
               <Grid item xs={6}>
                 <T variant="h3" gutterBottom>

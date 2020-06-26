@@ -4,7 +4,6 @@ import AppBar from '../../components/AppBar';
 import { Typography, Container, Box, Grid } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
-import classnames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
   container: {

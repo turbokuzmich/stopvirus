@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
-import Menu from '../../components/Menu';
 import Viewer from '../../components/3dViewer';
 import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
 import ParamBase from '../../components/Params';
@@ -68,7 +67,6 @@ export default function Home() {
     <Layout title="NEW///BREEZE — для дома">
       <>
         <AppBar />
-        <Menu />
         <Box classes={{ root: classes.container }}>
           <Box classes={{ root: classes.hero }}>
             <Container>
@@ -97,11 +95,13 @@ export default function Home() {
               <Grid item xs={6}>
                 <div className={classes.viewerContainer}>
                   <Viewer
-                    folder="https://cdn.scaleflex.it/demo/chair-360-72/"
-                    filename="chair_{index}.jpg?v1"
-                    amount={72}
+                    folder="/rotate/1/"
+                    filename="{index}.jpg"
+                    amount={143}
                     magnifier={3}
+                    speed={300}
                     autoplay
+                    reverse
                   />
                 </div>
               </Grid>
