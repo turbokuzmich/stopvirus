@@ -41,7 +41,7 @@ const Section = withStyles((theme) => ({
   }),
 }))((props) => <Container {...omit(props, ['gutterTop', 'gutterBottom'])} />);
 
-export default function Abount() {
+export default function About() {
   const classes = useStyles();
 
   return (

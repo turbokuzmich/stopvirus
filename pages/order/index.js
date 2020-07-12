@@ -4,6 +4,8 @@ import AppBar from '../../components/AppBar';
 import { Typography, Container, Box, Grid } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
+import csrf from '../../middlewares/csrf';
+import cookies from '../../middlewares/cookies';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,7 +43,7 @@ const Section = withStyles((theme) => ({
   }),
 }))((props) => <Container {...omit(props, ['gutterTop', 'gutterBottom'])} />);
 
-export default function Abount() {
+export default function Order() {
   const classes = useStyles();
 
   return (
@@ -78,4 +80,27 @@ export default function Abount() {
       </>
     </Layout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  await runMiddleware(cookies, ctx);
+  await runMiddleware(csrf, ctx);
+
+  return {
+    props: {
+      token: ctx.req.csrfToken(),
+    },
+  };
+}
+
+async function runMiddleware(fn, ctx) {
+  return new Promise((resolve, reject) => {
+    fn(ctx.req, ctx.res, (error) => {
+      if (error) {
+        return reject(error);
+      }
+
+      resolve();
+    });
+  });
 }
