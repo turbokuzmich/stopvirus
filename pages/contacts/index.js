@@ -52,7 +52,30 @@ export default function Abount() {
         <Box classes={{ root: classes.container }}>
           <Section>
             <Grid container>
-              <Grid item xs={8}></Grid>
+              <Grid item xs={8}>
+                <T variant="h1" gutterBottom>
+                  Заказ
+                </T>
+                <T paragraph>
+                  Для оформления заказа, пожалуйста, заполните форму. Если у вас возникли вопросы, воспользуйтесь
+                  контактами ниже.
+                </T>
+                <T paragraph>
+                  Телефон: <a href="tel:+79296490043">+7 929 649-00-43</a>
+                </T>
+                <T paragraph>
+                  Почта: <a href="mailto:info@newbr.ru">info@newbr.ru</a>
+                </T>
+                <T paragraph>
+                  <a href="https://wa.me/79296490043" target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                  </a>
+                  ,{' '}
+                  <a href="https://teleg.run/turbokuzmich" target="_blank" rel="noopener noreferrer">
+                    Telegram
+                  </a>
+                </T>
+              </Grid>
             </Grid>
           </Section>
         </Box>

@@ -16,6 +16,8 @@
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
+    "formik": "^2.1.4",
+    "formik-material-ui": "^2.0.1",
     "helmet": "^3.23.3",
     "json2mq": "^0.2.0",
     "lodash": "^4.17.15",
@@ -24,8 +26,10 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-number-format": "^4.4.1",
     "react-page-visibility": "^6.1.0",
-    "react-responsive-carousel": "^3.2.7"
+    "react-responsive-carousel": "^3.2.7",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
