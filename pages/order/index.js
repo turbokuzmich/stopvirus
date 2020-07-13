@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
 import NumberFormat from 'react-number-format';
+import Head from 'next/head';
 import { Formik, Form, Field } from 'formik';
 import { Typography, Container, Box, Grid, MenuItem, Button } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(8, 0),
   },
   button: {
+    marginTop: theme.spacing(2),
+  },
+  captcha: {
     marginTop: theme.spacing(2),
   },
 }));
@@ -126,12 +130,42 @@ export default function Order(props) {
     phone: '',
     email: '',
     comment: '',
-    _csrf: props.token,
+    _csrf: props.csrf,
   };
+
+  useEffect(() => {
+    const initCaptcha = () => {
+      window.grecaptcha.render('captcha', {
+        sitekey: props.captcha,
+      });
+    };
+
+    if (window.grecaptcha) {
+      initCaptcha();
+    } else {
+      window.recaptchaCallbacks.push(initCaptcha);
+    }
+  }, []);
 
   return (
     <Layout title="NEW///BREEZE — заказать">
       <>
+        <Head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+var recaptchaCallbacks = [];
+
+function onRecaptchaLoad() {
+  recaptchaCallbacks.forEach(function(callback) {
+    callback();
+  })
+}
+          `,
+            }}
+          />
+          <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer />
+        </Head>
         <AppBar />
         <Box classes={{ root: classes.container }}>
           <Section>
@@ -206,6 +240,7 @@ export default function Order(props) {
                           multiline
                           fullWidth
                         />
+                        <div className={classes.captcha} id="captcha" />
                         <Field name="_csrf" type="hidden" />
                         <Button
                           classes={{ root: classes.button }}
@@ -250,7 +285,8 @@ export default function Order(props) {
 }
 
 Order.propTypes = {
-  token: PropTypes.string.isRequired,
+  csrf: PropTypes.string.isRequired,
+  captcha: PropTypes.string.isRequired,
 };
 
 export async function getServerSideProps(ctx) {
@@ -259,7 +295,8 @@ export async function getServerSideProps(ctx) {
 
   return {
     props: {
-      token: ctx.req.csrfToken(),
+      csrf: ctx.req.csrfToken(),
+      captcha: ctx.req.recaptchaSiteKey,
     },
   };
 }

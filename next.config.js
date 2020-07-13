@@ -6,6 +6,12 @@ module.exports = function () {
 
   app.use(helmet());
 
+  app.use((req, res, next) => {
+    req.recaptchaSiteKey = process.env.RECAPTCHA_SITE_KEY;
+
+    next();
+  });
+
   return {
     middleware: async function (req, res) {
       return new Promise(function (resolve, reject) {
