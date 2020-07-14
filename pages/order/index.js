@@ -146,6 +146,10 @@ export default function Order(props) {
         initCaptcha();
       });
     } else {
+      if (!window.recaptchaCallbacks) {
+        window.recaptchaCallbacks = [];
+      }
+
       window.recaptchaCallbacks.push(initCaptcha);
     }
   }, []);
@@ -157,7 +161,7 @@ export default function Order(props) {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-var recaptchaCallbacks = [];
+window.recaptchaCallbacks = window.recaptchaCallbacks || [];
 
 function onRecaptchaLoad() {
   recaptchaCallbacks.forEach(function(callback) {
@@ -167,7 +171,12 @@ function onRecaptchaLoad() {
           `,
             }}
           />
-          <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer />
+          <script
+            src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit"
+            key="recaptcha"
+            async
+            defer
+          />
         </Head>
         <AppBar />
         <Box classes={{ root: classes.container }}>
