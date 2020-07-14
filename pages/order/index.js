@@ -9,6 +9,7 @@ import { Typography, Container, Box, Grid, MenuItem, Button } from '@material-ui
 import { TextField } from 'formik-material-ui';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
+import once from 'lodash/once';
 import csrf from '../../middlewares/csrf';
 import cookies from '../../middlewares/cookies';
 import * as yup from 'yup';
@@ -134,14 +135,16 @@ export default function Order(props) {
   };
 
   useEffect(() => {
-    const initCaptcha = () => {
+    const initCaptcha = once(() => {
       window.grecaptcha.render('captcha', {
         sitekey: props.captcha,
       });
-    };
+    });
 
     if (window.grecaptcha) {
-      initCaptcha();
+      window.grecaptcha.ready(() => {
+        initCaptcha();
+      });
     } else {
       window.recaptchaCallbacks.push(initCaptcha);
     }
