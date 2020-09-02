@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
+import Captcha from '../../components/Captcha';
 import NumberFormat from 'react-number-format';
-import Head from 'next/head';
 import { Formik, Form, Field } from 'formik';
 import { Typography, Container, Box, Grid, MenuItem, Button } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
-import once from 'lodash/once';
 import csrf from '../../middlewares/csrf';
 import cookies from '../../middlewares/cookies';
 import * as yup from 'yup';
@@ -26,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(8, 0),
   },
   button: {
-    marginTop: theme.spacing(2),
-  },
-  captcha: {
     marginTop: theme.spacing(2),
   },
 }));
@@ -119,6 +115,7 @@ const schema = yup.object().shape({
     .string()
     .email('Пожалуйста, укажите правильный адрес электронной почты')
     .required('Пожалуйста, укажите адрес электронной почты'),
+  captcha: yup.string().required('Пожалуйста, укажите капчу'),
 });
 
 export default function Order(props) {
@@ -131,53 +128,13 @@ export default function Order(props) {
     phone: '',
     email: '',
     comment: '',
+    captcha: '',
     _csrf: props.csrf,
   };
-
-  useEffect(() => {
-    const initCaptcha = once(() => {
-      window.grecaptcha.render('captcha', {
-        sitekey: props.captcha,
-      });
-    });
-
-    if (window.grecaptcha) {
-      window.grecaptcha.ready(() => {
-        initCaptcha();
-      });
-    } else {
-      if (!window.recaptchaCallbacks) {
-        window.recaptchaCallbacks = [];
-      }
-
-      window.recaptchaCallbacks.push(initCaptcha);
-    }
-  }, []);
 
   return (
     <Layout title="NEW///BREEZE — заказать">
       <>
-        <Head>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-window.recaptchaCallbacks = window.recaptchaCallbacks || [];
-
-function onRecaptchaLoad() {
-  recaptchaCallbacks.forEach(function(callback) {
-    callback();
-  })
-}
-          `,
-            }}
-          />
-          <script
-            src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit"
-            key="recaptcha"
-            async
-            defer
-          />
-        </Head>
         <AppBar />
         <Box classes={{ root: classes.container }}>
           <Section>
@@ -252,7 +209,7 @@ function onRecaptchaLoad() {
                           multiline
                           fullWidth
                         />
-                        <div className={classes.captcha} id="captcha" />
+                        <Captcha token={props.captcha} />
                         <Field name="_csrf" type="hidden" />
                         <Button
                           classes={{ root: classes.button }}
