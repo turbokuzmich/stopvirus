@@ -462,10 +462,7 @@ class CI360Viewer {
   }
 
   getOriginalSrc() {
-    const currentImage = this.images[this.activeImage - 1];
-    const lastIndex = currentImage.src.lastIndexOf('//');
-
-    return lastIndex > 10 ? currentImage.src.slice(lastIndex) : currentImage.src;
+    return this.images[this.activeImage - 1].src.replace(/1s/, '1');
   }
 
   magnify() {

@@ -95,7 +95,7 @@ export default function Home() {
               <Grid item xs={6}>
                 <div className={classes.viewerContainer}>
                   <Viewer
-                    folder="/rotate/1/"
+                    folder="/rotate/1s/"
                     filename="{index}.jpg"
                     amount={143}
                     magnifier={3}
