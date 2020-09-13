@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import BackgroundVideo from '../components/BackgroundVideo';
 import Layout from '../components/Layout';
 import Logo, { logoSize } from '../components/Logo/Wide';
@@ -11,6 +11,7 @@ import { makeStyles, withStyles, styled } from '@material-ui/core/styles';
 import { Carousel } from 'react-responsive-carousel';
 import mediaQuery from '../utils/mediaQuery';
 import classnames from 'classnames';
+import getStaticUrl from '../utils/static';
 
 const PageSlide = {
   Hero: 0,
@@ -118,35 +119,35 @@ const slides = [
   {
     title: 'Для дома',
     link: '/home',
-    image: '/main-home-bg.jpg',
+    image: getStaticUrl('main-home-bg.jpg'),
     text:
       'Интерьерные системы очистки водуха NEW//BREEZE - это компактные, встроенные в корпус небольших тумб технологичные устройства, обеспечивающие очистку воздуха в помещении до уровня  требуемого в медицине, фармакологии и хирургии. Сверхвысокая производительность обеспечивает  быструю и качественную очистку воздушной смеси (воздуха), а фильтры класса HEPA гарантируют  безопасность и результат.  Широкий выбор внешней отделки устройств подойдёт тем, кто заботится о внешнем виде своего жилья и уделяет дизайну помещения не последнюю роль.',
   },
   {
     title: 'Для салонов красоты',
     link: '/beauty-salon',
-    image: '/main-salon-bg.jpg',
+    image: getStaticUrl('main-salon-bg.jpg'),
     text:
       'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для маникюра',
     link: '/manicure',
-    image: '/main-manicure-bg.jpg',
+    image: getStaticUrl('main-manicure-bg.jpg'),
     text:
       'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для барбер шопов',
     link: '/barbershop',
-    image: '/main-barber-bg.jpg',
+    image: getStaticUrl('main-barber-bg.jpg'),
     text:
       'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
   },
   {
     title: 'Для ресторанов',
     link: '/restaurant',
-    image: '/main-restaurant-bg.jpg',
+    image: getStaticUrl('main-restaurant-bg.jpg'),
     text:
       'Безопасность ваших клиентов является приоритетом, поэтому мы оснастили системы NEW//BREEZE  долговечными фильтрами самого высокого класса по очень приятной и доступной стоимости. Широкий спектр применения в ресторанном бизнесе и в кальянных. Индивидуальный проект и возможность встраивания в различные поверхности',
   },
@@ -161,28 +162,32 @@ export default function Home() {
   /**
    * @param {SlideChange} change
    */
-  const onSlideChanged = (change) => {
+  const onSlideChanged = useCallback((change) => {
     setSlide(change.to);
-  };
+  }, []);
 
-  const onDetailsClicked = () => {
+  const onDetailsClicked = useCallback(() => {
     if (fullPageRef && fullPageRef.current) {
       fullPageRef.current.scrollToSlide(PageSlide.Details);
     }
-  };
+  }, []);
 
-  const onLogoClicked = (event) => {
+  const onLogoClicked = useCallback((event) => {
     event.preventDefault();
 
     if (fullPageRef && fullPageRef.current) {
       fullPageRef.current.scrollToSlide(PageSlide.Hero);
     }
-  };
+  }, []);
 
   return (
     <Layout title="NEW///BREEZE — системы очистки воздуха">
       <>
-        <BackgroundVideo src="/background.mp4" type="video/mp4" poster="/background.jpg" />
+        <BackgroundVideo
+          src={getStaticUrl('background.mp4')}
+          type="video/mp4"
+          poster={getStaticUrl('background.jpg')}
+        />
         <AppBar classes={{ root: classes.appBar }}>
           <Toolbar>
             <IconButton onClick={() => setMenuOpen(true)} disableFocusRipple>
@@ -261,7 +266,6 @@ export default function Home() {
     </Layout>
   );
 }
-
 const SliderArrow = withStyles({
   main: {
     position: 'absolute',

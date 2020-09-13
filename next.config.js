@@ -13,6 +13,9 @@ module.exports = function () {
   });
 
   return {
+    env: {
+      staticDomain: 'd2dkxuu4i3rety.cloudfront.net',
+    },
     middleware: async function (req, res) {
       return new Promise(function (resolve, reject) {
         app.handle(req, res, function (error) {

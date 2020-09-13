@@ -7,6 +7,7 @@ import ParamBase from '../../components/Params';
 import Link from 'next/link';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import omit from 'lodash/omit';
+import getStaticUrl from '../../utils/static';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -95,7 +96,7 @@ export default function Home() {
               <Grid item xs={6}>
                 <div className={classes.viewerContainer}>
                   <Viewer
-                    folder="/rotate/1s/"
+                    folder={getStaticUrl('rotate/1s/')}
                     filename="{index}.jpg"
                     amount={143}
                     magnifier={3}
