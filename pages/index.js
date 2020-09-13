@@ -80,31 +80,12 @@ const useStyles = makeStyles((theme) => ({
   menuIcon: {
     fill: '#fff',
   },
-  // FIXME bad images on retina
   detailsSlide: {
-    backgroundImage: 'url(/main-home-bg.jpg)',
+    backgroundImage: 'url(/main-home-bg-2000w.jpg)',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     position: 'relative',
     overflow: 'hidden',
-    [mediaQuery({ maxWidth: 2000 })]: {
-      backgroundImage: 'url(/main-home-bg-2000w.jpg)',
-    },
-    [mediaQuery({ maxWidth: 1600 })]: {
-      backgroundImage: 'url(/main-home-bg-1600w.jpg)',
-    },
-    [mediaQuery({ maxWidth: 1200 })]: {
-      backgroundImage: 'url(/main-home-bg-1200w.jpg)',
-    },
-    [mediaQuery({ maxWidth: 800 })]: {
-      backgroundImage: 'url(/main-home-bg-800w.jpg)',
-    },
-    [mediaQuery({ maxWidth: 480 })]: {
-      backgroundImage: 'url(/main-home-bg-480w.jpg)',
-    },
-    [mediaQuery({ maxWidth: 320 })]: {
-      backgroundImage: 'url(/main-home-bg-320w.jpg)',
-    },
   },
   detailsContainer: {
     display: 'flex',
