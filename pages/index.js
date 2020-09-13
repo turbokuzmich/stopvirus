@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     fill: '#fff',
   },
   detailsSlide: {
-    backgroundImage: 'url(/main-home-bg-2000w.jpg)',
+    backgroundImage: `url(${getStaticUrl('main-home-bg-2000w.jpg')})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     position: 'relative',
