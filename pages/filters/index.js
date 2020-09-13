@@ -98,12 +98,16 @@ export default function Filters() {
     router.replace(`/filters#${filter}`, undefined, { shallow: true });
     setFilter(filter);
 
-    router.events.on('hashChangeComplete', (newUrl) => {
+    const onHashChanged = (newUrl) => {
       const url = new URL(newUrl, location.origin);
       const filter = getFilterFromHash(url.hash);
 
       setFilter(filter);
-    });
+    };
+
+    router.events.on('hashChangeComplete', onHashChanged);
+
+    return () => router.events.off('hashChangeComplete', onHashChanged);
   }, []);
 
   return (

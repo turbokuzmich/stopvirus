@@ -80,15 +80,64 @@ const useStyles = makeStyles((theme) => ({
   menuIcon: {
     fill: '#fff',
   },
+  // FIXME bad images on retina
   detailsSlide: {
-    backgroundColor: '#f8f8f8',
-  },
-  carousel: {
-    height: '100vh',
-    '& .control-dots .dot': {
-      background: 'rgba(0, 0, 0, .2)',
-      boxShadow: 'none',
+    backgroundImage: 'url(/main-home-bg.jpg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    position: 'relative',
+    overflow: 'hidden',
+    [mediaQuery({ maxWidth: 2000 })]: {
+      backgroundImage: 'url(/main-home-bg-2000w.jpg)',
     },
+    [mediaQuery({ maxWidth: 1600 })]: {
+      backgroundImage: 'url(/main-home-bg-1600w.jpg)',
+    },
+    [mediaQuery({ maxWidth: 1200 })]: {
+      backgroundImage: 'url(/main-home-bg-1200w.jpg)',
+    },
+    [mediaQuery({ maxWidth: 800 })]: {
+      backgroundImage: 'url(/main-home-bg-800w.jpg)',
+    },
+    [mediaQuery({ maxWidth: 480 })]: {
+      backgroundImage: 'url(/main-home-bg-480w.jpg)',
+    },
+    [mediaQuery({ maxWidth: 320 })]: {
+      backgroundImage: 'url(/main-home-bg-320w.jpg)',
+    },
+  },
+  detailsContainer: {
+    display: 'flex',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, .5)',
+    alignItems: 'center',
+    color: '#fff',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  detailsText: {
+    width: '70vmin',
+    fontSize: '3vmin',
+    fontWeight: 300,
+    [mediaQuery([{ maxWidth: 500 }, { maxHeight: 500 }])]: {
+      width: '90vmin',
+      fontSize: '4vmin',
+    },
+    [mediaQuery([{ maxWidth: 320 }, { maxHeight: 320 }])]: {
+      fontSize: '5vmin',
+    },
+  },
+  detailsButtons: {
+    width: '70vmin',
+    [mediaQuery([{ maxWidth: 500 }, { maxHeight: 500 }])]: {
+      width: '90vmin',
+    },
+  },
+  detailsButton: {
+    color: '#fff',
+    borderColor: '#fff',
+    margin: theme.spacing(0, 1, 1, 0),
+    fontSize: '2vmin',
   },
 }));
 
@@ -113,45 +162,6 @@ const HeroButton = withStyles((theme) => ({
     },
   },
 }))(Button);
-
-// FIXME use src-set
-const slides = [
-  {
-    title: 'Для дома',
-    link: '/home',
-    image: getStaticUrl('main-home-bg.jpg'),
-    text:
-      'Интерьерные системы очистки водуха NEW//BREEZE - это компактные, встроенные в корпус небольших тумб технологичные устройства, обеспечивающие очистку воздуха в помещении до уровня  требуемого в медицине, фармакологии и хирургии. Сверхвысокая производительность обеспечивает  быструю и качественную очистку воздушной смеси (воздуха), а фильтры класса HEPA гарантируют  безопасность и результат.  Широкий выбор внешней отделки устройств подойдёт тем, кто заботится о внешнем виде своего жилья и уделяет дизайну помещения не последнюю роль.',
-  },
-  {
-    title: 'Для салонов красоты',
-    link: '/beauty-salon',
-    image: getStaticUrl('main-salon-bg.jpg'),
-    text:
-      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
-  },
-  {
-    title: 'Для маникюра',
-    link: '/manicure',
-    image: getStaticUrl('main-manicure-bg.jpg'),
-    text:
-      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
-  },
-  {
-    title: 'Для барбер шопов',
-    link: '/barbershop',
-    image: getStaticUrl('main-barber-bg.jpg'),
-    text:
-      'Защита клиента и мастера, а также очистка воздуха во всём помещении салона красоты всего одним устройством. Собирает пыль от гель-лаков и ногтевой напил, волосяную пыль. Готовые решения и индивидуальный проект с соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и производительно. Ваши клиенты в безопасности, а значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о сотрудниках и клиентах, повышение КПД, увеличение прибыли.',
-  },
-  {
-    title: 'Для ресторанов',
-    link: '/restaurant',
-    image: getStaticUrl('main-restaurant-bg.jpg'),
-    text:
-      'Безопасность ваших клиентов является приоритетом, поэтому мы оснастили системы NEW//BREEZE  долговечными фильтрами самого высокого класса по очень приятной и доступной стоимости. Широкий спектр применения в ресторанном бизнесе и в кальянных. Индивидуальный проект и возможность встраивания в различные поверхности',
-  },
-];
 
 export default function Home() {
   const [slide, setSlide] = useState(0);
@@ -227,155 +237,43 @@ export default function Home() {
             </Container>
           </Slide>
           <Slide className={classes.detailsSlide}>
-            <Carousel
-              className={classes.carousel}
-              showThumbs={false}
-              autoPlay={false}
-              infiniteLoop={false}
-              showStatus={false}
-              useKeyboardArrows
-              renderArrowPrev={(onClick, hasPrev, label) => {
-                return <SliderArrow onClick={onClick} label={label} hasPrev={hasPrev} prev />;
-              }}
-              renderArrowNext={(onClick, hasNext, label) => {
-                return <SliderArrow onClick={onClick} label={label} hasNext={hasNext} next />;
-              }}
-              swipeable
-            >
-              {slides.map(({ title, link, text, image }, index) => {
-                return (
-                  <SlideContainer key={index} image={image}>
-                    <SlideContent>
-                      <SlideHeading variant="h2" gutterBottom>
-                        {title}
-                      </SlideHeading>
-                      <SlideParagraph>{text}</SlideParagraph>
-                      <Link href={link}>
-                        <SlideButton color="primary" variant="contained" size="large">
-                          Подробнее
-                        </SlideButton>
-                      </Link>
-                    </SlideContent>
-                  </SlideContainer>
-                );
-              })}
-            </Carousel>
+            <Box className={classes.detailsContainer}>
+              <Typography classes={{ root: classes.detailsText }} paragraph>
+                Очистка воздуха от&nbsp;примесей, дыма, бактерий и&nbsp;вирусов. Сверхвысокая производительность
+                и&nbsp;фильтры класса HEPA гарантируют результат. Приятные цены, индивидуальный дизайн внешней отделки,
+                а&nbsp;также безопасный, очищенный воздух.
+              </Typography>
+              <Box className={classes.detailsButtons}>
+                <Link href="/home">
+                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                    Для дома
+                  </Button>
+                </Link>
+                <Link href="/beauty-salon">
+                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                    Для салонов красоты
+                  </Button>
+                </Link>
+                <Link href="/manicure">
+                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                    Для маникюра
+                  </Button>
+                </Link>
+                <Link href="/barbershop">
+                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                    Для барбершопов
+                  </Button>
+                </Link>
+                <Link href="/restaurant">
+                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                    Для ресторанов
+                  </Button>
+                </Link>
+              </Box>
+            </Box>
           </Slide>
         </FullPage>
       </>
     </Layout>
   );
 }
-const SliderArrow = withStyles({
-  main: {
-    position: 'absolute',
-    top: '50%',
-    left: 0,
-    transform: 'translateY(-50%)',
-    height: 180,
-    width: 100,
-    lineHeight: '180px',
-    textAlign: 'center',
-    cursor: 'pointer',
-    zIndex: 1,
-    backgroundColor: 'rgba(0, 0, 0, .5)',
-    transition: 'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-    color: '#ffffff',
-    fontSize: '6rem',
-    '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, .3)',
-    },
-    [mediaQuery([{ maxWidth: 630 }, { maxHeight: 555 }])]: {
-      display: 'none',
-    },
-  },
-  next: {
-    left: 'initial',
-    right: 0,
-  },
-  disabled: {
-    backgroundColor: 'rgba(0, 0, 0, .1)',
-    cursor: 'default',
-  },
-})(function Arrow({ classes, onClick, hasPrev, hasNext, prev, next }) {
-  const symbol = prev ? '⮃' : '⮁';
-  const disabled = (prev && !hasPrev) || (next && !hasNext);
-
-  return (
-    <div onClick={onClick} className={classnames(classes.main, { [classes.next]: next, [classes.disabled]: disabled })}>
-      {symbol}
-    </div>
-  );
-});
-
-const SlideContainer = styled(Box)(({ image }) => ({
-  backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0, 0, 0, 0.8)), url(${image})`,
-  backgroundSize: 'cover',
-  height: '100vh',
-  paddingTop: 64,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: '#fff',
-  position: 'relative',
-}));
-
-const SlideContent = styled(Box)(() => ({
-  textAlign: 'left',
-  width: '60%',
-  [mediaQuery([{ maxWidth: 630 }, { maxHeight: 555 }])]: {
-    width: '90%',
-  },
-}));
-
-const SlideButton = withStyles((theme) => ({
-  root: {
-    fontSize: '1.2rem',
-    fontWeight: '300',
-    padding: theme.spacing(2, 4),
-    [mediaQuery([{ maxWidth: 1550 }, { maxHeight: 660 }])]: {
-      fontSize: '1rem',
-      padding: theme.spacing(1, 3),
-    },
-    [mediaQuery([{ maxWidth: 1000 }, { maxHeight: 400 }])]: {
-      fontSize: '0.8rem',
-      padding: theme.spacing(1, 2),
-    },
-    [mediaQuery([{ maxWidth: 400 }, { maxHeight: 380 }])]: {
-      fontSize: '0.6rem',
-    },
-  },
-}))(Button);
-
-const SlideHeading = withStyles({
-  root: {
-    [mediaQuery([{ maxWidth: 1550 }, { maxHeight: 660 }])]: {
-      fontSize: '3rem',
-    },
-    [mediaQuery([{ maxWidth: 1000 }, { maxHeight: 400 }])]: {
-      fontSize: '2rem',
-    },
-    [mediaQuery([{ maxWidth: 400 }, { maxHeight: 380 }])]: {
-      fontSize: '1.2rem',
-    },
-  },
-})(Typography);
-
-const SlideParagraph = withStyles((theme) => ({
-  root: {
-    fontSize: '1.5rem',
-    fontWeight: '300',
-    lineHeight: '1.6em',
-    marginBottom: theme.spacing(4),
-    [mediaQuery([{ maxWidth: 1550 }, { maxHeight: 660 }])]: {
-      fontSize: '1.2rem',
-      marginBottom: theme.spacing(2),
-    },
-    [mediaQuery([{ maxWidth: 1000 }, { maxHeight: 400 }])]: {
-      fontSize: '1rem',
-    },
-    [mediaQuery([{ maxWidth: 400 }, { maxHeight: 380 }])]: {
-      fontSize: '0.8rem',
-    },
-  },
-}))(Typography);
