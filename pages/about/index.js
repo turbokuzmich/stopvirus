@@ -7,8 +7,11 @@ import omit from 'lodash/omit';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: 64,
     fontSize: '1.2rem',
+    paddingTop: 59,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 64,
+    },
   },
   hero: {
     background: 'linear-gradient(21deg, rgba(59,59,59,1) 0%, rgba(204,204,204,1) 100%)',
@@ -48,10 +51,10 @@ export default function About() {
     <Layout title="NEW///BREEZE — о нас">
       <>
         <AppBar />
-        <Box classes={{ root: classes.container }}>
+        <Box className={classes.container}>
           <Section>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={12} md={8}>
                 <T variant="h1" gutterBottom>
                   О нас
                 </T>

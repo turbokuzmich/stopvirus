@@ -7,10 +7,8 @@ import Link from 'next/link';
 import Menu from '../components/Menu';
 import { FullPage, Slide } from '../components/FullPage';
 import { Container, Box, Typography, Button, AppBar, Toolbar, IconButton, Link as A } from '@material-ui/core';
-import { makeStyles, withStyles, styled } from '@material-ui/core/styles';
-import { Carousel } from 'react-responsive-carousel';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import mediaQuery from '../utils/mediaQuery';
-import classnames from 'classnames';
 import getStaticUrl from '../utils/static';
 
 const PageSlide = {
@@ -144,6 +142,29 @@ const HeroButton = withStyles((theme) => ({
   },
 }))(Button);
 
+const pages = [
+  {
+    href: '/home',
+    title: 'Для дома',
+  },
+  {
+    href: '/beauty-salon',
+    title: 'Для салонов красоты',
+  },
+  {
+    href: '/manicure',
+    title: 'Для маникюра',
+  },
+  {
+    href: '/barbershop',
+    title: 'Для барбершопов',
+  },
+  {
+    href: '/restaurant',
+    title: 'Для ресторанов',
+  },
+];
+
 export default function Home() {
   const [slide, setSlide] = useState(0);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -225,31 +246,13 @@ export default function Home() {
                 а&nbsp;также безопасный, очищенный воздух.
               </Typography>
               <Box className={classes.detailsButtons}>
-                <Link href="/home">
-                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
-                    Для дома
-                  </Button>
-                </Link>
-                <Link href="/beauty-salon">
-                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
-                    Для салонов красоты
-                  </Button>
-                </Link>
-                <Link href="/manicure">
-                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
-                    Для маникюра
-                  </Button>
-                </Link>
-                <Link href="/barbershop">
-                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
-                    Для барбершопов
-                  </Button>
-                </Link>
-                <Link href="/restaurant">
-                  <Button classes={{ root: classes.detailsButton }} variant="outlined">
-                    Для ресторанов
-                  </Button>
-                </Link>
+                {pages.map(({ href, title }) => (
+                  <Link key={href} href={href}>
+                    <Button classes={{ root: classes.detailsButton }} variant="outlined">
+                      {title}
+                    </Button>
+                  </Link>
+                ))}
               </Box>
             </Box>
           </Slide>

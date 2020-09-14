@@ -118,7 +118,7 @@ export default function Filters() {
           <Box classes={{ root: classes.hero }}>
             <Container>
               <Grid container>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <T variant="h1" gutterBottom>
                     Фильтры
                   </T>
@@ -156,7 +156,7 @@ export default function Filters() {
           </Section>
           <Section classes={{ root: classnames({ [classes.hidden]: filter !== 'filtek' }) }}>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={12} md={8}>
                 <T variant="h4" gutterBottom>
                   ФилТек<sup>®</sup>
                 </T>
@@ -215,7 +215,7 @@ export default function Filters() {
           </Section>
           <Section classes={{ root: classnames({ [classes.hidden]: filter !== 'f8' }) }}>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={12} md={8}>
                 <T variant="h4" gutterBottom>
                   Фильтры тонкой очистки воздуха F8
                 </T>
@@ -238,7 +238,7 @@ export default function Filters() {
           </Section>
           <Section classes={{ root: classnames({ [classes.hidden]: filter !== 'hepa' }) }}>
             <Grid container>
-              <Grid item xs={8}>
+              <Grid item xs={12} md={8}>
                 <T variant="h4" gutterBottom>
                   Класс фильтра: HEPA<sup>®</sup> Н13, H14
                 </T>

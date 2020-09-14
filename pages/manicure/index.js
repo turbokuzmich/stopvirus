@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
 import Viewer from '../../components/3dViewer';
-import { Typography, Container, Box, Button, Grid, Link as A } from '@material-ui/core';
+import { Typography, Container, Box, Button, Grid, Link as A, Hidden } from '@material-ui/core';
 import ParamBase from '../../components/Params';
 import Link from 'next/link';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
   viewerContainer: {
     paddingRight: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
+    },
   },
 }));
 
@@ -76,23 +79,35 @@ export default function Home() {
           <Box classes={{ root: classes.hero }}>
             <Container>
               <Grid container>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <T variant="h1" gutterBottom>
                     Для маникюра и педикюра
                   </T>
-                  <T variant="body1" paragraph>Защита клиента и&nbsp;мастера, а&nbsp;также очистка воздуха во&nbsp;всём помещении салона красоты всего одним устройством. Собирает пыль от&nbsp;гель-лаков и&nbsp;ногтевой напил, волосяную пыль. Готовые решения и&nbsp;индивидуальный проект с&nbsp;соблюдением условий дизайна вашего интерьера. Компактно, недорого, функционально и&nbsp;производительно. Ваши клиенты в&nbsp;безопасности, а&nbsp;значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о&nbsp;сотрудниках и&nbsp;клиентах, повышение КПД, увеличение прибыли.</T>
+                  <T variant="body1" paragraph>
+                    Защита клиента и&nbsp;мастера, а&nbsp;также очистка воздуха во&nbsp;всём помещении салона красоты
+                    всего одним устройством. Собирает пыль от&nbsp;гель-лаков и&nbsp;ногтевой напил, волосяную пыль.
+                    Готовые решения и&nbsp;индивидуальный проект с&nbsp;соблюдением условий дизайна вашего интерьера.
+                    Компактно, недорого, функционально и&nbsp;производительно. Ваши клиенты в&nbsp;безопасности,
+                    а&nbsp;значит довольны. Системы NEW//BREEZE это показатель вашего уровня, заботы о&nbsp;сотрудниках
+                    и&nbsp;клиентах, повышение КПД, увеличение прибыли.
+                  </T>
                   <Link href="/order">
                     <BuyButton color="primary" variant="contained" size="large">
                       Заказать
                     </BuyButton>
                   </Link>
                 </Grid>
+                <Hidden implementation="css" smDown={true}>
+                  <Grid item xs={false} md={6}>
+                    {/* Картинка */}
+                  </Grid>
+                </Hidden>
               </Grid>
             </Container>
           </Box>
           <Section>
             <Grid container>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <div className={classes.viewerContainer}>
                   <Viewer
                     folder={getStaticUrl('rotate/1s/')}
@@ -105,7 +120,7 @@ export default function Home() {
                   />
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <T variant="h3" gutterBottom>
                   Технические характеристики
                 </T>

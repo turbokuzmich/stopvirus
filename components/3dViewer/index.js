@@ -12,9 +12,7 @@ export default function Viewer({ folder, filename, amount, fullscreen, magnifier
       rotateViewer = new RotateViewer(containerRef.current);
     }
 
-    return () => {
-      rotateViewer.destroy();
-    };
+    return () => rotateViewer.destroy();
   }, []);
 
   const props = {};

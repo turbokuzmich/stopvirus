@@ -138,15 +138,11 @@ export default function Order(props) {
         <AppBar />
         <Box classes={{ root: classes.container }}>
           <Section>
-            <Grid container>
-              <Grid item xs={8}>
-                <T variant="h1" gutterBottom>
-                  Заказ
-                </T>
-              </Grid>
-            </Grid>
+            <T variant="h1" gutterBottom>
+              Заказ
+            </T>
             <Grid spacing={6} container>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 {data === null ? (
                   <Formik initialValues={initialValues} validationSchema={schema} onSubmit={setData}>
                     {({ isSubmitting }) => (
@@ -228,7 +224,7 @@ export default function Order(props) {
                   <pre>{JSON.stringify(data, null, 2)}</pre>
                 )}
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <T paragraph>
                   Телефон: <a href="tel:+79296490043">+7 929 649-00-43</a>
                 </T>
