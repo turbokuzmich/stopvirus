@@ -94,6 +94,15 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
   },
+  promoVideo: {
+    width: '70vmin',
+    height: '39.375vmin',
+    marginBottom: theme.spacing(2),
+    [mediaQuery([{ maxWidth: 500 }, { maxHeight: 500 }])]: {
+      width: '90vmin',
+      height: '50.625vmin',
+    },
+  },
   detailsText: {
     width: '70vmin',
     fontSize: '3vmin',
@@ -240,6 +249,13 @@ export default function Home() {
           </Slide>
           <Slide className={classes.detailsSlide}>
             <Box className={classes.detailsContainer}>
+              <iframe
+                className={classes.promoVideo}
+                src="https://www.youtube.com/embed/aOoiTrvQDUY"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
               <Typography classes={{ root: classes.detailsText }} paragraph>
                 Очистка воздуха от&nbsp;примесей, дыма, бактерий и&nbsp;вирусов. Сверхвысокая производительность
                 и&nbsp;фильтры класса HEPA гарантируют результат. Приятные цены, индивидуальный дизайн внешней отделки,
