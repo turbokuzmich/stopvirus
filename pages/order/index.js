@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Layout from '../../components/Layout';
 import AppBar from '../../components/AppBar';
@@ -120,7 +120,7 @@ const schema = yup.object().shape({
 
 export default function Order(props) {
   const classes = useStyles();
-  const [data, setData] = useState(null);
+  const [orderState, setOrderState] = useState('form'); // form | sending | sent
 
   const initialValues = {
     type: 'home',
@@ -131,6 +131,109 @@ export default function Order(props) {
     captcha: '',
     _csrf: props.csrf,
   };
+
+  const sendOrder = useCallback(async (data) => {
+    setOrderState('sending');
+
+    await fetch('/api/order', {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(data),
+    });
+
+    setOrderState('sent');
+  });
+
+  let form = null;
+
+  if (orderState === 'form') {
+    form = (
+      <Formik initialValues={initialValues} validationSchema={schema} onSubmit={sendOrder}>
+        {({ isSubmitting }) => (
+          <Form autoComplete="off" noValidate>
+            <Field
+              component={TextField}
+              name="type"
+              label="Для чего?"
+              variant="outlined"
+              autoComplete="off"
+              margin="normal"
+              fullWidth
+              required
+              select
+            >
+              {types.map((option) => (
+                <MenuItem key={option.label} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </Field>
+            <Field
+              component={TextField}
+              name="fio"
+              label="ФИО"
+              variant="outlined"
+              autoComplete="off"
+              margin="normal"
+              fullWidth
+              required
+            />
+            <Field
+              component={TextField}
+              name="phone"
+              label="Телефон"
+              variant="outlined"
+              autoComplete="off"
+              margin="normal"
+              InputProps={{ inputComponent: PhoneField }}
+              fullWidth
+            />
+            <Field
+              component={TextField}
+              name="email"
+              label="Почта"
+              variant="outlined"
+              autoComplete="off"
+              margin="normal"
+              fullWidth
+              required
+            />
+            <Field
+              component={TextField}
+              name="comment"
+              label="Комментарий"
+              variant="outlined"
+              autoComplete="off"
+              margin="normal"
+              rows={4}
+              multiline
+              fullWidth
+            />
+            <Captcha token={props.captcha} />
+            <Field name="_csrf" type="hidden" />
+            <Button
+              classes={{ root: classes.button }}
+              type="submit"
+              size="large"
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+            >
+              Заказать
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    );
+  } else if (orderState === 'sending') {
+    form = <div>Обрабатываем ваш заказ. Пожалуйста, подождите.</div>;
+  } else {
+    form = <div>Ваш заказ успешно отправлен.</div>;
+  }
 
   return (
     <Layout title="NEW///BREEZE — заказать">
@@ -143,86 +246,7 @@ export default function Order(props) {
             </T>
             <Grid spacing={6} container>
               <Grid item xs={12} md={6}>
-                {data === null ? (
-                  <Formik initialValues={initialValues} validationSchema={schema} onSubmit={setData}>
-                    {({ isSubmitting }) => (
-                      <Form autoComplete="off" noValidate>
-                        <Field
-                          component={TextField}
-                          name="type"
-                          label="Для чего?"
-                          variant="outlined"
-                          autoComplete="off"
-                          margin="normal"
-                          fullWidth
-                          required
-                          select
-                        >
-                          {types.map((option) => (
-                            <MenuItem key={option.label} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </Field>
-                        <Field
-                          component={TextField}
-                          name="fio"
-                          label="ФИО"
-                          variant="outlined"
-                          autoComplete="off"
-                          margin="normal"
-                          fullWidth
-                          required
-                        />
-                        <Field
-                          component={TextField}
-                          name="phone"
-                          label="Телефон"
-                          variant="outlined"
-                          autoComplete="off"
-                          margin="normal"
-                          InputProps={{ inputComponent: PhoneField }}
-                          fullWidth
-                        />
-                        <Field
-                          component={TextField}
-                          name="email"
-                          label="Почта"
-                          variant="outlined"
-                          autoComplete="off"
-                          margin="normal"
-                          fullWidth
-                          required
-                        />
-                        <Field
-                          component={TextField}
-                          name="comment"
-                          label="Комментарий"
-                          variant="outlined"
-                          autoComplete="off"
-                          margin="normal"
-                          rows={4}
-                          multiline
-                          fullWidth
-                        />
-                        <Captcha token={props.captcha} />
-                        <Field name="_csrf" type="hidden" />
-                        <Button
-                          classes={{ root: classes.button }}
-                          type="submit"
-                          size="large"
-                          variant="contained"
-                          color="primary"
-                          disabled={isSubmitting}
-                        >
-                          Заказать
-                        </Button>
-                      </Form>
-                    )}
-                  </Formik>
-                ) : (
-                  <pre>{JSON.stringify(data, null, 2)}</pre>
-                )}
+                {form}
               </Grid>
               <Grid item xs={12} md={6}>
                 <T paragraph>
