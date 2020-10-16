@@ -16,7 +16,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2rem',
   },
   hero: {
-    background: 'linear-gradient(21deg, rgba(59,59,59,1) 0%, rgba(204,204,204,1) 100%)',
+    background: `linear-gradient(21deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%), url(${getStaticUrl('main-salon-bg-2000w.jpg')})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
     color: '#fff',
     padding: theme.spacing(8, 0),
   },
