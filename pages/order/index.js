@@ -8,6 +8,7 @@ import { Formik, Form, Field } from 'formik';
 import { Typography, Container, Box, Grid, MenuItem, Button } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { runMiddleware } from '../../helpers/middleware';
 import omit from 'lodash/omit';
 import csrf from '../../middlewares/csrf';
 import cookies from '../../middlewares/cookies';
@@ -120,7 +121,7 @@ const schema = yup.object().shape({
 
 export default function Order(props) {
   const classes = useStyles();
-  const [orderState, setOrderState] = useState('form'); // form | sending | sent
+  const [orderState, setOrderState] = useState('form'); // form | sending | sent | error
 
   const initialValues = {
     type: 'home',
@@ -135,7 +136,7 @@ export default function Order(props) {
   const sendOrder = useCallback(async (data) => {
     setOrderState('sending');
 
-    await fetch('/api/order', {
+    const response = await fetch('/api/order', {
       method: 'POST',
       cache: 'no-cache',
       headers: {
@@ -144,8 +145,11 @@ export default function Order(props) {
       referrerPolicy: 'no-referrer',
       body: JSON.stringify(data),
     });
+    const { status } = await response.json();
 
-    setOrderState('sent');
+    if (status === 'success') {
+      setOrderState('sent');
+    }
   });
 
   let form = null;
@@ -279,8 +283,8 @@ Order.propTypes = {
 };
 
 export async function getServerSideProps(ctx) {
-  await runMiddleware(cookies, ctx);
-  await runMiddleware(csrf, ctx);
+  await runMiddleware(cookies, ctx.req, ctx.res);
+  await runMiddleware(csrf, ctx.req, ctx.res);
 
   return {
     props: {
@@ -288,16 +292,4 @@ export async function getServerSideProps(ctx) {
       captcha: ctx.req.recaptchaSiteKey,
     },
   };
-}
-
-async function runMiddleware(fn, ctx) {
-  return new Promise((resolve, reject) => {
-    fn(ctx.req, ctx.res, (error) => {
-      if (error) {
-        return reject(error);
-      }
-
-      resolve();
-    });
-  });
 }
